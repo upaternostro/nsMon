@@ -1,13 +1,29 @@
-import { fromObject } from '@nativescript/core'
+import { Observable, ObservableArray } from '@nativescript/core'
 
-import { SelectedPageService } from '../shared/selected-page-service'
+export class HostsViewModel extends Observable {
+  #hosts;
+  #showAllHosts;
 
-export function SearchViewModel() {
-  SelectedPageService.getInstance().updateSelectedPage('Search')
+  constructor() {
+    super();
 
-  const viewModel = fromObject({
-    /* Add your view model properties here */
-  })
+    this.#hosts = new ObservableArray();
+    this.#showAllHosts = false;
+  }
 
-  return viewModel
+  addHost(h) {
+    this.#hosts.push(h);
+  }
+
+  get hosts() {
+    return this.#hosts;
+  }
+
+  get showAllHosts() {
+    return this.#showAllHosts;
+  }
+
+  set showAllHosts(showAllHosts) {
+    this.#showAllHosts = showAllHosts;
+  }
 }

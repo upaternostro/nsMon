@@ -10,8 +10,20 @@
         </GridLayout>
     </ActionBar>
 
-    <GridLayout class="page__content">
-        <Label class="page__content-icon fas" text="&#xf015;"></Label>
-        <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+    <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto" class="page__content">
+        <Label col="0" row="0" text="Node name:"/>
+        <Label col="1" row="0" text="{{ icingaApplication.status.icingaapplication.app.node_name }}"/>
+        <Label col="0" row="1" text="Version:"/>
+        <Label col="1" row="1" text="{{ icingaApplication.status.icingaapplication.app.version }}"/>
+        <Label col="0" row="2" text="Since:"/>
+        <Label col="1" row="2" text="{{ icingaApplication.status.icingaapplication.app.program_start ? new Date(icingaApplication.status.icingaapplication.app.program_start*1000) : '' }}"/>
+        <Label col="0" row="3" text="Uptime:"/>
+        <Label col="1" row="3" text="{{ cIB.status.uptime }}"/>
+        <Label col="0" row="4" text="Flags:"/>
+        <Label col="1" row="4" text="{{ icingaApplication.status.icingaapplication.app.enable_host_checks }}"/>
+        <Label col="0" row="5" text="Hosts:"/>
+        <Label col="1" row="5" text="{{ (cIB.status.num_hosts_up + cIB.status.num_hosts_problem) + '/' + cIB.status.num_hosts_down }}"/>
+        <Label col="0" row="6" text="Services:"/>
+        <Label col="1" row="6" text="{{ (cIB.status.num_services_ok + cIB.status.num_services_problem) + '/' + cIB.status.num_services_critical + '/' + cIB.status.num_services_warning }}"/>
     </GridLayout>
 </Page>

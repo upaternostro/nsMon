@@ -1,13 +1,21 @@
 import { Application } from '@nativescript/core'
 
+import { SelectedPageService } from '../shared/selected-page-service'
 import { SettingsViewModel } from './settings-view-model'
 
+var page;
+
 export function onNavigatingTo(args) {
-  const page = args.object
-  page.bindingContext = new SettingsViewModel()
+  page = args.object;
+  SelectedPageService.getInstance().updateSelectedPage('Settings');
+  page.bindingContext = new SettingsViewModel();
 }
 
 export function onDrawerButtonTap(args) {
-  const sideDrawer = Application.getRootView()
-  sideDrawer.showDrawer()
+  const sideDrawer = Application.getRootView();
+  sideDrawer.showDrawer();
+}
+
+export function onSaveTap(args) {
+  page.bindingContext.persistConfig();
 }

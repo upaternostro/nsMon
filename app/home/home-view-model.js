@@ -1,13 +1,32 @@
-import { fromObject } from '@nativescript/core'
+import { Observable } from '@nativescript/core'
 
-import { SelectedPageService } from '../shared/selected-page-service'
+export class HomeViewModel extends Observable {
+  #icingaApplication;
+  #cIB;
 
-export function HomeViewModel() {
-  SelectedPageService.getInstance().updateSelectedPage('Home')
+  constructor() {
+    super();
+  }
 
-  const viewModel = fromObject({
-    /* Add your view model properties here */
-  })
+  get icingaApplication() {
+    return this.#icingaApplication;
+  }
 
-  return viewModel
+  get cIB() {
+    return this.#cIB;
+  }
+
+  set icingaApplication(icingaApplication) {
+    if (icingaApplication.name === 'IcingaApplication') {
+      this.#icingaApplication = icingaApplication;
+      this.notifyPropertyChange('icingaApplication', this.#icingaApplication);
+    }
+  }
+
+  set cIB(cIB) {
+    if (cIB.name === 'CIB') {
+      this.#cIB = cIB;
+      this.notifyPropertyChange('cIB', this.#cIB);
+    }
+  }
 }

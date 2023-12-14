@@ -1,13 +1,48 @@
-import { Application } from '@nativescript/core'
+import { Application, ApplicationSettings } from '@nativescript/core'
 
-import { SearchViewModel } from './hosts-view-model'
+import { SelectedPageService } from '../shared/selected-page-service'
+import { HostsViewModel } from './hosts-view-model'
+import { IcingaFacade } from '~/shared/icinga-facade';
+
+var page;
 
 export function onNavigatingTo(args) {
-  const page = args.object
-  page.bindingContext = new SearchViewModel()
+  page = args.object;
+  SelectedPageService.getInstance().updateSelectedPage('Hosts');
+  page.bindingContext = new HostsViewModel();
+  
+  populateHostsList(false);
 }
 
 export function onDrawerButtonTap(args) {
-  const sideDrawer = Application.getRootView()
-  sideDrawer.showDrawer()
+  const sideDrawer = Application.getRootView();
+  sideDrawer.showDrawer();
+}
+
+export function hostsCB(obj) {
+  if (obj) {
+    for (const r of obj.results) {
+      page.bindingContext.addHost(r);
+    }
+  }
+}
+
+export function onCheckedChange(args) {
+  const showAllHosts = !page.bindingContext.showAllHosts;
+  const hvm = new HostsViewModel();
+
+  hvm.showAllHosts = showAllHosts;
+  page.bindingContext = hvm;
+
+  populateHostsList(showAllHosts);
+}
+
+function populateHostsList(showAllHosts) {
+  const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
+
+  if (showAllHosts) {
+    icingaFacade.getHosts(hostsCB);
+  } else {
+    icingaFacade.getHostProblems(hostsCB);
+  }
 }

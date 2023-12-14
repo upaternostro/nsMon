@@ -1,5 +1,6 @@
 @import '@nativescript/theme/core';
 @import '@nativescript/theme/default';
+@import 'app-variables';
 
 // Place any CSS rules you want to apply on both iOS and Android here.
 // This is where the vast majority of your CSS code goes.
@@ -40,4 +41,29 @@
 // Drawer navigation custom styles
 .nt-drawer__header-image {
   color: const(grey);
+}
+
+.service-list-status-icon {
+  text-align: center;
+  color: $ns-accent;
+  padding-top: 8;
+  border-radius: 8;
+  border-width: 2;
+  border-color: $ns-accent;
+  font-size: 18;
+  width: 36;
+  height: 36;
+  vertical-align: middle;
+}
+
+.ok {
+  background-color: #44bb77;
+}
+
+.warning {
+  background-color: #ffcc66;
+}
+
+.critical {
+  background-color: #ff99aa;
 }
