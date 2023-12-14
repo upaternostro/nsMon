@@ -1,13 +1,14 @@
 import { Application } from '@nativescript/core'
 
-import { SearchViewModel } from './search-view-model'
+import { BrowseViewModel } from './services-view-model'
 
 export function onNavigatingTo(args) {
   const page = args.object
-  page.bindingContext = new SearchViewModel()
+  page.bindingContext = new BrowseViewModel()
 }
 
 export function onDrawerButtonTap(args) {
   const sideDrawer = Application.getRootView()
   sideDrawer.showDrawer()
 }
+
