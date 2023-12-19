@@ -1,4 +1,5 @@
 import { Http } from '@nativescript/core'
+import { encode } from 'base-64'
 
 export class IcingaFacade {
     #url;
@@ -15,7 +16,7 @@ export class IcingaFacade {
         const requestOptions = {
             url: this.#url + path,
             method: 'GET',
-            headers: { 'Authorization': 'Basic ' + btoa(this.#username + ':' + this.#password) },
+            headers: { 'Authorization': 'Basic ' + encode(this.#username + ':' + this.#password) },
         };
           
         Http.request(requestOptions).then(result => {
