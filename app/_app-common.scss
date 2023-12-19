@@ -43,7 +43,7 @@
   color: const(grey);
 }
 
-.service-list-status-icon {
+.services-list-status-icon, .hosts-list-status-icon {
   text-align: center;
   color: $ns-accent;
   padding-top: 8;

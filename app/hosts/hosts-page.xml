@@ -4,13 +4,13 @@
 
     <ActionBar>
         <NavigationButton visibility="hidden"></NavigationButton>
-        <GridLayout columns="50, *">
+        <GridLayout columns="30,*">
             <Label class="action-bar-title" text="Hosts" colSpan="2"/>
             <Label class="fas" text="&#xf0c9;" tap="onDrawerButtonTap"/>
         </GridLayout>
     </ActionBar>
 
-    <GridLayout class="page__content" rows="auto,auto">
+    <GridLayout class="page__content" rows="auto,*">
         <GridLayout row="0" columns="auto,*,auto">
             <Label col="0" class="action-bar-title" text="Show all hosts" />
             <!-- col 1 is empty -->
@@ -19,7 +19,7 @@
         <ListView row="1" height="100%" items="{{ hosts }}" width="100%" itemTap="onItemTap">
             <ListView.itemTemplate>
                 <GridLayout columns="auto,auto" class="{{ 'default-list-item ' + (attrs.state == 2 ? 'critical' : (attrs.state == 1 ? 'warning' : 'ok')) }}">
-                    <Label col="0" class="fas service-list-status-icon" text="{{ attrs.acknowledgement == 2 ? '&#xf1f6;' : (attrs.state == 2 ? '&#xf06a;' : '&#xf071;') }}" />
+                    <Label col="0" class="fas hosts-list-status-icon" text="{{ attrs.acknowledgement == 2 ? '&#xf1f6;' : (attrs.state == 2 ? '&#xf06a;' : '&#xf058;') }}" />
                     <Label col="1" text="{{ attrs.name }}" />
                 </GridLayout>
             </ListView.itemTemplate>

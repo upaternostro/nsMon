@@ -4,8 +4,8 @@
 
     <ActionBar>
         <NavigationButton visibility="hidden"></NavigationButton>
-        <GridLayout columns="50, *">
-            <Label class="action-bar-title" text="Home" colSpan="2"/>
+        <GridLayout columns="30,*">
+            <Label class="action-bar-title" text="nsMon" colSpan="2"/>
             <Label class="fas" text="&#xf0c9;" tap="onDrawerButtonTap"/>
         </GridLayout>
     </ActionBar>
@@ -16,14 +16,28 @@
         <Label col="0" row="1" text="Version:"/>
         <Label col="1" row="1" text="{{ icingaApplication.status.icingaapplication.app.version }}"/>
         <Label col="0" row="2" text="Since:"/>
-        <Label col="1" row="2" text="{{ icingaApplication.status.icingaapplication.app.program_start ? new Date(icingaApplication.status.icingaapplication.app.program_start*1000) : '' }}"/>
+        <Label col="1" row="2" text="{{ icingaApplication.status.icingaapplication.app.program_start ? date_fns.format(new Date(icingaApplication.status.icingaapplication.app.program_start*1000), 'dd/MM/yyyy HH:mm:ss')  : '' }}"/>
         <Label col="0" row="3" text="Uptime:"/>
-        <Label col="1" row="3" text="{{ cIB.status.uptime }}"/>
+        <Label col="1" row="3" text="{{ date_fns.formatDuration(date_fns.intervalToDuration({ start: new Date(0), end: new Date(cIB.status.uptime * 1000) })) }}"/>
         <Label col="0" row="4" text="Flags:"/>
         <Label col="1" row="4" text="{{ icingaApplication.status.icingaapplication.app.enable_host_checks }}"/>
         <Label col="0" row="5" text="Hosts:"/>
-        <Label col="1" row="5" text="{{ (cIB.status.num_hosts_up + cIB.status.num_hosts_problem) + '/' + cIB.status.num_hosts_down }}"/>
+        <Label col="1" row="5">
+            <FormattedString>
+                <Span text="{{ cIB.status.num_hosts_up + cIB.status.num_hosts_problem }}" />
+                <Span text="/" />
+                <Span text="{{ cIB.status.num_hosts_down }}" style="color: red" />
+            </FormattedString>
+        </Label>
         <Label col="0" row="6" text="Services:"/>
-        <Label col="1" row="6" text="{{ (cIB.status.num_services_ok + cIB.status.num_services_problem) + '/' + cIB.status.num_services_critical + '/' + cIB.status.num_services_warning }}"/>
+        <Label col="1" row="6">
+            <FormattedString>
+                <Span text="{{ cIB.status.num_services_ok + cIB.status.num_services_problem }}" />
+                <Span text="/" />
+                <Span text="{{ cIB.status.num_services_critical }}" style="color: red" />
+                <Span text="/" />
+                <Span text="{{ cIB.status.num_services_warning }}" style="color: orange" />
+            </FormattedString>
+        </Label>
     </GridLayout>
 </Page>
