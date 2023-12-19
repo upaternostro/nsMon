@@ -1,4 +1,5 @@
 import { Application } from '@nativescript/core'
+import { format, intervalToDuration, formatDuration } from 'date-fns'
 
 ;(function () {
     var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
@@ -56,6 +57,18 @@ import { Application } from '@nativescript/core'
       return output;
     };
 }());
+global.date_fns = {
+  format: function(date, pFormat, options) {
+    return format(date, pFormat, options);
+  },
+  intervalToDuration: function(interval) {
+// console.log(interval);
+    return intervalToDuration(interval);
+  },
+  formatDuration: function(duration, options) {
+    return formatDuration(duration, options);
+  }
+};
 
 Application.run({ moduleName: 'app-root/app-root' })
 

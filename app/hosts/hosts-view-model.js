@@ -26,4 +26,8 @@ export class HostsViewModel extends Observable {
   set showAllHosts(showAllHosts) {
     this.#showAllHosts = showAllHosts;
   }
+
+  getItem(pos) {
+    return this.#hosts.getItem(pos);
+  }
 }

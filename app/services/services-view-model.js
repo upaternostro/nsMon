@@ -26,4 +26,8 @@ export class ServicesViewModel extends Observable {
   set showAllServices(showAllServices) {
     this.#showAllServices = showAllServices;
   }
+
+  getItem(pos) {
+    return this.#services.getItem(pos);
+  }
 }

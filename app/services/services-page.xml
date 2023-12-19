@@ -16,7 +16,7 @@
             <!-- col 1 is empty -->
             <Switch col="2" checked="{{ showAllServices }}" checkedChange="onCheckedChange" />
         </GridLayout>
-        <ListView row="1" height="100%" items="{{ services }}" width="100%">
+        <ListView row="1" height="100%" items="{{ services }}" width="100%" itemTap="onItemTap">
             <ListView.itemTemplate>
                 <GridLayout columns="auto,auto,auto" class="{{ 'default-list-item ' + (attrs.state == 2 ? 'critical' : (attrs.state == 1 ? 'warning' : 'ok')) }}">
                     <Label col="0" class="fas service-list-status-icon" text="{{ attrs.acknowledgement == 2 ? '&#xf1f6;' : (attrs.state == 2 ? '&#xf06a;' : '&#xf071;') }}" />

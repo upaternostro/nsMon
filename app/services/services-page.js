@@ -1,4 +1,4 @@
-import { Application, ApplicationSettings } from '@nativescript/core'
+import { Application, ApplicationSettings, Frame } from '@nativescript/core'
 
 import { SelectedPageService } from '../shared/selected-page-service'
 import { ServicesViewModel } from './services-view-model'
@@ -45,4 +45,11 @@ function populateServicesList(showAllServices) {
   } else {
     icingaFacade.getServiceProblems(servicesCB);
   }
+}
+
+export function onItemTap(args) {
+  Frame.topmost().navigate({
+    moduleName: 'service/service-page',
+    context: { service: page.bindingContext.getItem(args.index) }
+  })
 }

@@ -67,3 +67,24 @@
 .critical {
   background-color: #ff99aa;
 }
+
+.service-detail-title, .host-detail-title {
+  background-color: #618db2;
+  font-weight: bold;
+  font-size: medium;
+
+  &.service-ok, &.host-ok {
+    color: #f9fdff;
+  }
+
+  &.service-critical, &.host-critical {
+    color: #f1d3df;
+  }
+}
+
+.service-detail-subtitle, .host-detail-subtitle {
+  color: #f9fdff;
+  background-color: #618db2;
+  font-weight: bold;
+  font-size: medium;
+}

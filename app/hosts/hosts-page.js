@@ -1,4 +1,4 @@
-import { Application, ApplicationSettings } from '@nativescript/core'
+import { Application, ApplicationSettings, Frame } from '@nativescript/core'
 
 import { SelectedPageService } from '../shared/selected-page-service'
 import { HostsViewModel } from './hosts-view-model'
@@ -45,4 +45,11 @@ function populateHostsList(showAllHosts) {
   } else {
     icingaFacade.getHostProblems(hostsCB);
   }
+}
+
+export function onItemTap(args) {
+  Frame.topmost().navigate({
+    moduleName: 'host/host-page',
+    context: { host: page.bindingContext.getItem(args.index) }
+  })
 }
