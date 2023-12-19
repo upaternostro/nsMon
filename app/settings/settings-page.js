@@ -6,6 +6,10 @@ import { SettingsViewModel } from './settings-view-model'
 var page;
 
 export function onNavigatingTo(args) {
+  if (args.isBackNavigation) {
+    return;
+  }
+  
   page = args.object;
   SelectedPageService.getInstance().updateSelectedPage('Settings');
   page.bindingContext = new SettingsViewModel();

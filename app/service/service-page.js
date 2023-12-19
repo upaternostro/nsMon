@@ -7,6 +7,10 @@ import { IcingaFacade } from '~/shared/icinga-facade';
 var page;
 
 export function onNavigatingTo(args) {
+  if (args.isBackNavigation) {
+    return;
+  }
+  
   page = args.object
   page.bindingContext = new ServiceViewModel(page.navigationContext.service)
   SelectedPageService.getInstance().updateSelectedPage('Service');

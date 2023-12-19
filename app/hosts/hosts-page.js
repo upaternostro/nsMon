@@ -7,6 +7,10 @@ import { IcingaFacade } from '~/shared/icinga-facade';
 var page;
 
 export function onNavigatingTo(args) {
+  if (args.isBackNavigation) {
+    return;
+  }
+  
   page = args.object;
   SelectedPageService.getInstance().updateSelectedPage('Hosts');
   page.bindingContext = new HostsViewModel();
