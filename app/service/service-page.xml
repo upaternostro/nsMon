@@ -27,7 +27,7 @@
         <Label row="3" col="1" text="{{ service.attrs.acknowledgement == 0 ? 'No' : 'Acknowledged' + (service.attrs.acknowledgement == 2 ? ' (Sticky)' : '') }}" />
         <StackLayout row="4" colSpan="2" orientation="horizontal">
             <Button text="{{ (service.attrs.acknowledgement != 0 ? 'Remove ' : '') + 'Ack' }}" isEnabled="{{ service.attrs.state != 0 }}" />
-            <Button text="Check" />
+            <Button text="Check" tap="onCheckTap" />
             <Button text="Comment" />
             <Button text="Notify" />
         </StackLayout>

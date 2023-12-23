@@ -57,4 +57,33 @@ export class IcingaFacade {
     getHostComments(hostName, callback) {
         this.request('/v1/objects/comments?joins=host.__name&filter=host.__name==%22' + hostName + '%22', callback);
     }
+
+    post(path, content, callback) {
+        const requestOptions = {
+            url: this.#url + path,
+            method: 'POST',
+            headers: { 
+                'Authorization': 'Basic ' + encode(this.#username + ':' + this.#password),
+                "Accept": "application/json",
+            },
+            content: JSON.stringify(content),
+        };
+
+        Http.request(requestOptions).then(result => {
+            if (result.statusCode == 200) {
+              callback(JSON.parse(result.content));
+            }
+        }, error => {
+            console.log(error);
+        });
+
+        return null;
+    }
+
+    rescheduleServiceCheck(name, callback) {
+        this.post('/v1/actions/reschedule-check', {
+            "type": "Service", 
+            "filter": "service.__name==\"" + name + "\"",
+        }, callback);
+    }
 }
