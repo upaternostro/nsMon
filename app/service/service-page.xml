@@ -1,6 +1,9 @@
 <Page
     navigatingTo="onNavigatingTo"
-    xmlns="http://schemas.nativescript.org/tns.xsd">
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:objectButtons="widgets/object-buttons"
+    xmlns:pluginOutput="widgets/plugin-output"
+    xmlns:comments="widgets/comments">
 
     <ActionBar>
         <NavigationButton visibility="hidden"></NavigationButton>
@@ -25,12 +28,7 @@
         <Label row="2" col="1" text="{{ service.joins.host.address }}" />
         <Label row="3" col="0" text="Acknowledged:" />
         <Label row="3" col="1" text="{{ service.attrs.acknowledgement == 0 ? 'No' : 'Acknowledged' + (service.attrs.acknowledgement == 2 ? ' (Sticky)' : '') }}" />
-        <StackLayout row="4" colSpan="2" orientation="horizontal">
-            <Button text="{{ (service.attrs.acknowledgement != 0 ? 'Remove ' : '') + 'Ack' }}" isEnabled="{{ service.attrs.state != 0 }}" />
-            <Button text="Check" tap="onCheckTap" />
-            <Button text="Comment" />
-            <Button text="Notify" />
-        </StackLayout>
+        <objectButtons:buttons row="4" colSpan="2" />
         <Label row="5" colSpan="2" class="service-detail-subtitle" text="Check Execution" />
         <Label row="6" col="0" text="Command:" />
         <Label row="6" col="1" text="{{ service.attrs.check_command }}" />
@@ -50,21 +48,7 @@
         <Label row="13" col="1" text="{{ dateFD(dateI2D({ start: new Date(0), end: new Date((service.attrs.last_check_result.execution_end - service.attrs.last_check_result.execution_start) * 1000) })) }}"/>
         <Label row="14" col="0" text="Flapping:" />
         <Label row="14" col="1" text="{{ service.attrs.flapping ? 'Yes' : 'No' }}" />
-        <Label row="15" colSpan="2" class="service-detail-subtitle" text="Plugin Output" />
-        <Label row="16" colSpan="2" text="{{ service.attrs.last_check_result.output }}" textWrap="true" />
-        <Label row="17" colSpan="2" class="service-detail-subtitle" text="Comments" visibility="{{ comments.length > 0 ? 'visible' : 'hidden' }}" />
-        <ListView row="18" colSpan="2" items="{{ comments }}" width="100%">
-            <ListView.itemTemplate>
-                <Label textWrap="true">
-                    <FormattedString>
-                        <Span text="{{ dateF(new Date(attrs.entry_time * 1000), 'dd/MM/yyyy HH:mm:ss') }}" fontWeight="bold" />
-                        <Span text=" (ack: " fontWeight="bold" />
-                        <Span text="{{ attrs.author }}" fontWeight="bold" />
-                        <Span text="): " fontWeight="bold" />
-                        <Span text="{{ attrs.text }}" />
-                    </FormattedString>
-                </Label>
-            </ListView.itemTemplate>
-        </ListView>
+        <pluginOutput:output row="15" colSpan="2" />
+        <comments:comments row="16" colSpan="2" />
     </GridLayout>
 </Page>

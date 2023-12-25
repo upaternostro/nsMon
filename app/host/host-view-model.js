@@ -21,6 +21,10 @@ export class HostViewModel extends Observable {
     return this.#host;
   }
 
+  get object() {
+    return this.#host;
+  }
+
   get comments() {
     return this.#comments;
   }

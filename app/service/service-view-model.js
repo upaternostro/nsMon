@@ -21,6 +21,10 @@ export class ServiceViewModel extends Observable {
     return this.#service;
   }
 
+  get object() {
+    return this.#service;
+  }
+
   get comments() {
     return this.#comments;
   }
