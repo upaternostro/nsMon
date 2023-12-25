@@ -3,6 +3,7 @@ import { Frame, ApplicationSettings } from '@nativescript/core'
 import { HostViewModel } from './host-view-model'
 import { SelectedPageService } from '../shared/selected-page-service'
 import { IcingaFacade } from '~/shared/icinga-facade';
+import { Toasty, ToastDuration } from '@triniwiz/nativescript-toasty';
 
 var page;
 
@@ -30,4 +31,16 @@ export function commentsCB(obj) {
 // console.log(r.attrs.text)
     }
   }
+}
+
+export function onCheckTap() {
+  const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
+  icingaFacade.rescheduleHostCheck(page.bindingContext.host.attrs.__name, checkCB);
+}
+
+export function checkCB(obj) {
+  new Toasty({ 
+    text: obj.results[0].status,
+    duration: ToastDuration.LONG,
+  }).show();
 }

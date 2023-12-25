@@ -86,4 +86,11 @@ export class IcingaFacade {
             "filter": "service.__name==\"" + name + "\"",
         }, callback);
     }
+
+    rescheduleHostCheck(name, callback) {
+        this.post('/v1/actions/reschedule-check', {
+            "type": "Host", 
+            "filter": "host.__name==\"" + name + "\"",
+        }, callback);
+    }
 }
