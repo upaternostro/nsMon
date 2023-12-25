@@ -6,7 +6,7 @@
         <NavigationButton visibility="hidden"></NavigationButton>
         <GridLayout columns="30,*" rows="auto,auto">
             <Label text="Service Details" colSpan="2" row="0" padding="0" />
-            <Label text="{{ date_fns.format(now, 'dd/MM/yyyy HH:mm:ss') }}" colSpan="2" row="1" fontSize="10" padding="0" />
+            <Label text="{{ dateF(now, 'dd/MM/yyyy HH:mm:ss') }}" colSpan="2" row="1" fontSize="10" padding="0" />
             <Label class="fas" text="&#xf060;" tap="onBackButtonTap" col="0" rowSpan="2" />
         </GridLayout>
     </ActionBar>
@@ -39,15 +39,15 @@
         <Label row="8" col="0" text="Zone:" />
         <Label row="8" col="1" text="{{ service.attrs.zone }}" />
         <Label row="9" col="0" text="Next check:" />
-        <Label row="9" col="1" text="{{ date_fns.format(new Date(service.attrs.next_check * 1000), 'dd/MM/yyyy HH:mm:ss') }}" />
+        <Label row="9" col="1" text="{{ dateF(new Date(service.attrs.next_check * 1000), 'dd/MM/yyyy HH:mm:ss') }}" />
         <Label row="10" col="0" text="Check interval:" />
-        <Label row="10" col="1" text="{{ date_fns.formatDuration(date_fns.intervalToDuration({ start: new Date(0), end: new Date(service.attrs.check_interval * 1000) })) }}"/>
+        <Label row="10" col="1" text="{{ dateFD(dateI2D({ start: new Date(0), end: new Date(service.attrs.check_interval * 1000) })) }}"/>
         <Label row="11" col="0" text="Reachable:" />
         <Label row="11" col="1" text="{{ service.attrs.last_reachable ? 'Yes' : 'No'  }}" />
         <Label row="12" col="0" text="Check attempts:" />
         <Label row="12" col="1" text="{{ service.attrs.check_attempt + '/' + service.attrs.max_check_attempts + ' (' + (service.attrs.state_type == 1 ? 'hard' : 'soft') + ' state)' }}" />
         <Label row="13" col="0" text="Execution time:" />
-        <Label row="13" col="1" text="{{ date_fns.formatDuration(date_fns.intervalToDuration({ start: new Date(0), end: new Date((service.attrs.last_check_result.execution_end - service.attrs.last_check_result.execution_start) * 1000) })) }}"/>
+        <Label row="13" col="1" text="{{ dateFD(dateI2D({ start: new Date(0), end: new Date((service.attrs.last_check_result.execution_end - service.attrs.last_check_result.execution_start) * 1000) })) }}"/>
         <Label row="14" col="0" text="Flapping:" />
         <Label row="14" col="1" text="{{ service.attrs.flapping ? 'Yes' : 'No' }}" />
         <Label row="15" colSpan="2" class="service-detail-subtitle" text="Plugin Output" />
@@ -57,7 +57,7 @@
             <ListView.itemTemplate>
                 <Label textWrap="true">
                     <FormattedString>
-                        <Span text="{{ date_fns.format(new Date(attrs.entry_time * 1000), 'dd/MM/yyyy HH:mm:ss') }}" fontWeight="bold" />
+                        <Span text="{{ dateF(new Date(attrs.entry_time * 1000), 'dd/MM/yyyy HH:mm:ss') }}" fontWeight="bold" />
                         <Span text=" (ack: " fontWeight="bold" />
                         <Span text="{{ attrs.author }}" fontWeight="bold" />
                         <Span text="): " fontWeight="bold" />

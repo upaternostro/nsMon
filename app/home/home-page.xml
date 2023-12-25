@@ -16,9 +16,9 @@
         <Label col="0" row="1" text="Version:"/>
         <Label col="1" row="1" text="{{ icingaApplication.status.icingaapplication.app.version }}"/>
         <Label col="0" row="2" text="Since:"/>
-        <Label col="1" row="2" text="{{ icingaApplication.status.icingaapplication.app.program_start ? date_fns.format(new Date(icingaApplication.status.icingaapplication.app.program_start*1000), 'dd/MM/yyyy HH:mm:ss')  : '' }}"/>
+        <Label col="1" row="2" text="{{ icingaApplication.status.icingaapplication.app.program_start ? dateF(new Date(icingaApplication.status.icingaapplication.app.program_start*1000), 'dd/MM/yyyy HH:mm:ss') : '' }}"/>
         <Label col="0" row="3" text="Uptime:"/>
-        <Label col="1" row="3" text="{{ date_fns.formatDuration(date_fns.intervalToDuration({ start: new Date(0), end: new Date(cIB.status.uptime * 1000) })) }}"/>
+        <Label col="1" row="3" text="{{ dateFD(dateI2D({ start: new Date(0), end: new Date(cIB.status.uptime * 1000) })) }}"/>
         <Label col="0" row="4" text="Flags:"/>
         <Label col="1" row="4" text="{{ icingaApplication.status.icingaapplication.app.enable_host_checks }}"/>
         <Label col="0" row="5" text="Hosts:"/>
