@@ -80,17 +80,25 @@ export class IcingaFacade {
         return null;
     }
 
-    rescheduleServiceCheck(name, callback) {
-        this.post('/v1/actions/reschedule-check', {
+    serviceFilter(name) {
+        return {
             "type": "Service", 
             "filter": "service.__name==\"" + name + "\"",
-        }, callback);
+        };
+    }
+
+    hostFilter(name) {
+        return {
+            "type": "Host", 
+            "filter": "host.__name==\"" + name + "\"",
+        };
+    }
+
+    rescheduleServiceCheck(name, callback) {
+        this.post('/v1/actions/reschedule-check', this.serviceFilter(name), callback);
     }
 
     rescheduleHostCheck(name, callback) {
-        this.post('/v1/actions/reschedule-check', {
-            "type": "Host", 
-            "filter": "host.__name==\"" + name + "\"",
-        }, callback);
+        this.post('/v1/actions/reschedule-check', this.hostFilter(name), callback);
     }
 }
