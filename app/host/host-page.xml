@@ -14,7 +14,7 @@
         </GridLayout>
     </ActionBar>
 
-    <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">
+    <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">
         <Label row="0" colSpan="2" class="{{ 'host-detail-title ' + (host.attrs.state == 0 ? 'host-ok' : 'host-critical' ) }}" text="{{ host.name }}" />
         <Label row="1" col="0" text="Hostname:" />
         <Label row="1" col="1" text="{{ host.name }}" />

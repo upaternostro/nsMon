@@ -14,7 +14,7 @@
         </GridLayout>
     </ActionBar>
 
-    <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">
+    <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">
         <Label row="0" colSpan="2" class="{{ 'service-detail-title ' + (service.attrs.state == 0 ? 'service-ok' : 'service-critical' ) }}">
             <FormattedString>
                 <Span text="{{ service.attrs.host_name }}" />
