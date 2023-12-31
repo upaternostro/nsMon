@@ -1,5 +1,5 @@
 <StackLayout orientation="horizontal">
-    <Button text="{{ (object.attrs.acknowledgement != 0 ? 'Remove ' : '') + 'Ack' }}" isEnabled="{{ object.attrs.state != 0 }}" />
+    <Button text="{{ (object.attrs.acknowledgement != 0 ? 'Remove ' : '') + 'Ack' }}" isEnabled="{{ object.attrs.state != 0 }}" tap="onAckTap" />
     <Button text="Check" tap="onCheckTap" />
     <Button text="Comment" />
     <Button text="Notify" />

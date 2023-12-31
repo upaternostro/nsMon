@@ -1,0 +1,12 @@
+<GridLayout rows="auto, auto, auto" columns="auto, auto" class="modal-dialog">
+    <Label row="0" col="0" colSpan="2" class="object-detail-subtitle" text="Remove acknowledgement" />
+	<Label row="1" col="0" colSpan="2" textWrap="true">
+        <FormattedString>
+            <Span text="{{ object.attrs.name }}" />
+            <Span text=" on " />
+            <Span text="{{ object.attrs.host_name }}" />
+        </FormattedString>
+    </Label>
+    <Button row="2" col="0" text="Ok" tap="onAckOkTap" />
+    <Button row="2" col="1" text="Cancel" tap="onAckCloseTap" />
+</GridLayout>

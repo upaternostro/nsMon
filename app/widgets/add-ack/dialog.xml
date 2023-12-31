@@ -1,0 +1,21 @@
+<GridLayout rows="auto,auto,auto,auto,auto,auto,auto,auto" columns="auto,auto" class="modal-dialog">
+    <Label row="0" col="0" colSpan="2" class="object-detail-subtitle">
+        <FormattedString>
+            <Span text="Acknowledge: " />
+            <Span text="{{ object.attrs.name }}" />
+        </FormattedString>
+    </Label>
+    <TextView row="1" col="0" colSpan="2" hint="Comment" text="{{ addAck.comment }}" />
+    <Label row="2" col="0" text="Persistent Comment" />
+    <Switch row="2" col="1" margin="5" checked="{{ addAck.persistentComment }}" />
+    <Label row="3" col="0" text="Use Expire Time" />
+    <Switch row="3" col="1" margin="5" checked="{{ addAck.useExpireTime }}" />
+    <Label id="date" row="4" col="0" text="{{ dateF(addAck.expireDate, 'dd/MM/yyyy') }}" visibility="{{ addAck.useExpireTime ? 'visible' : 'collapsed' }}" horizontalAlignment="right" paddingRight="5" tap="onDateTap" />
+    <Label id="time" row="4" col="1" text="{{ dateF(addAck.expireTime, 'HH:mm') }}" visibility="{{ addAck.useExpireTime ? 'visible' : 'collapsed' }}" paddingLeft="5" tap="onTimeTap" />
+    <Label row="5" col="0" text="Sticky Acknowledgement" />
+    <Switch row="5" col="1" margin="5" checked="{{ addAck.stickyAcknowledgement }}" />
+    <Label row="6" col="0" text="Send Notification" />
+    <Switch row="6" col="1" checked="true" margin="5" checked="{{ addAck.sendNotification }}" />
+    <Button row="7" col="0" text="Ok" tap="onAckOkTap" />
+    <Button row="7" col="1" text="Cancel" tap="onAckCloseTap" />
+</GridLayout>

@@ -101,4 +101,38 @@ export class IcingaFacade {
     rescheduleHostCheck(name, callback) {
         this.post('/v1/actions/reschedule-check', this.hostFilter(name), callback);
     }
+
+    removeServiceAck(name, callback) {
+        this.post('/v1/actions/remove-acknowledgement', this.serviceFilter(name), callback);
+    }
+
+    removeHostAck(name, callback) {
+        this.post('/v1/actions/remove-acknowledgement', this.hostFilter(name), callback);
+    }
+
+    acknowledgeServiceProblem(name, author, comment, expiry, sticky, notify, persistent, callback) {
+        var params = this.serviceFilter(name);
+
+        params.author = author;
+        params.comment = comment;
+        if (expiry) params.expiry = expiry;
+        if (sticky) params.sticky = sticky;
+        if (notify) params.notify = notify;
+        if (persistent) params.persistent = persistent;
+
+        this.post('/v1/actions/acknowledge-problem', params, callback);
+    }
+
+    acknowledgeHostProblem(name, author, comment, expiry, sticky, notify, persistent, callback) {
+        var params = this.hostFilter(name);
+
+        params.author = author;
+        params.comment = comment;
+        if (expiry) params.expiry = expiry;
+        if (sticky) params.sticky = sticky;
+        if (notify) params.notify = notify;
+        if (persistent) params.persistent = persistent;
+
+       this.post('/v1/actions/acknowledge-problem', params, callback);
+    }
 }

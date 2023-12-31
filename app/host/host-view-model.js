@@ -4,6 +4,7 @@ export class HostViewModel extends Observable {
   #now;
   #host;
   #comments = new ObservableArray();
+  #addAck;
 
   constructor(host) {
     super();
@@ -11,6 +12,7 @@ export class HostViewModel extends Observable {
     this.#now = new Date();
     this.#host = host;
     this.#comments.length = 0;
+    this.#addAck = null;
   }
 
   get now() {
@@ -27,6 +29,14 @@ export class HostViewModel extends Observable {
 
   get comments() {
     return this.#comments;
+  }
+
+  get addAck() {
+    return this.#addAck;
+  }
+
+  set addAck(addAck) {
+    this.#addAck = addAck;
   }
 
   addComment(comment) {

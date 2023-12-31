@@ -88,3 +88,19 @@
   font-weight: bold;
   font-size: medium;
 }
+
+// see https://github.com/williamjuan027/nativescript-rootlayout-demo
+.modal-dialog {
+  vertical-align: center;
+  horizontal-align: center;
+  background-color: white;
+  padding: 20 10;
+  border-width: 2;
+  border-color: #618db2;
+  border-radius: 20 19 20 20;
+}
+
+// inspired by https://blog.nativescript.org/how-to-build-a-simple-dialog-for-your-nativescript-apps/
+.shadeCover {
+  background-color: rgba(0,0,0,0.7);
+}

@@ -4,6 +4,7 @@ export class ServiceViewModel extends Observable {
   #now;
   #service;
   #comments = new ObservableArray();
+  #addAck;
 
   constructor(service) {
     super();
@@ -11,6 +12,7 @@ export class ServiceViewModel extends Observable {
     this.#now = new Date();
     this.#service = service;
     this.#comments.length = 0;
+    this.#addAck = null;
   }
 
   get now() {
@@ -27,6 +29,14 @@ export class ServiceViewModel extends Observable {
 
   get comments() {
     return this.#comments;
+  }
+
+  get addAck() {
+    return this.#addAck;
+  }
+
+  set addAck(addAck) {
+    this.#addAck = addAck;
   }
 
   addComment(comment) {
