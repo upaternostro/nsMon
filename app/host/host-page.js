@@ -1,7 +1,7 @@
 import { Frame, ApplicationSettings } from '@nativescript/core'
 
 import { HostViewModel } from './host-view-model'
-import { SelectedPageService } from '../shared/selected-page-service'
+import { SelectedPageService } from '~/shared/selected-page-service'
 import { IcingaFacade } from '~/shared/icinga-facade';
 import { Toasty, ToastDuration } from '@triniwiz/nativescript-toasty';
 import { openModal } from '~/shared/modal'

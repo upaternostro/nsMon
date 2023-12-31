@@ -1,6 +1,6 @@
 import { Application, ApplicationSettings, Frame } from '@nativescript/core'
 
-import { SelectedPageService } from '../shared/selected-page-service'
+import { SelectedPageService } from '~/shared/selected-page-service'
 import { HostsViewModel } from './hosts-view-model'
 import { IcingaFacade } from '~/shared/icinga-facade';
 

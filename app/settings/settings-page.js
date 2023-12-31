@@ -1,6 +1,6 @@
 import { Application } from '@nativescript/core'
 
-import { SelectedPageService } from '../shared/selected-page-service'
+import { SelectedPageService } from '~/shared/selected-page-service'
 import { SettingsViewModel } from './settings-view-model'
 
 var page;
