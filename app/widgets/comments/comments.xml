@@ -1,8 +1,8 @@
 <StackLayout>
     <Label class="object-detail-subtitle" text="Comments" visibility="{{ comments.length > 0 ? 'visible' : 'hidden' }}" />
-    <ListView items="{{ comments }}" width="100%">
+    <ListView items="{{ comments }}" width="100%" height="50">
         <ListView.itemTemplate>
-            <Label textWrap="true">
+            <Label textWrap="true" padding="0">
                 <FormattedString>
                     <Span text="{{ dateF(new Date(attrs.entry_time * 1000), 'dd/MM/yyyy HH:mm:ss') }}" fontWeight="bold" />
                     <Span text=" (ack: " fontWeight="bold" />
