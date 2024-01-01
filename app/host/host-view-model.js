@@ -7,6 +7,7 @@ export class HostViewModel extends Observable {
   #dialogModel;
   #addAck;
   #addComment;
+  #addNotification;
 
   constructor(host) {
     super();
@@ -17,6 +18,7 @@ export class HostViewModel extends Observable {
     this.#dialogModel = null;
     this.#addAck = null;
     this.#addComment = null;
+    this.#addNotification = null;
   }
 
   get now() {
@@ -47,6 +49,10 @@ export class HostViewModel extends Observable {
     return this.#addComment;
   }
 
+  get addNotification() {
+    return this.#addNotification;
+  }
+
   set addAck(addAck) {
     this.#dialogModel = addAck;
     this.#addAck = addAck;
@@ -55,6 +61,11 @@ export class HostViewModel extends Observable {
   set addComment(addComment) {
     this.#dialogModel = addComment;
     this.#addComment = addComment;
+  }
+
+  set addNotification(addNotification) {
+    this.#dialogModel = addNotification;
+    this.#addNotification = addNotification;
   }
 
   addComments(comment) {

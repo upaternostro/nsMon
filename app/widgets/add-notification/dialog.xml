@@ -1,0 +1,13 @@
+<GridLayout rows="auto,auto,auto,auto" columns="auto,auto" class="modal-dialog">
+    <Label row="0" col="0" colSpan="2" class="object-detail-subtitle">
+        <FormattedString>
+            <Span text="Notification: " />
+            <Span text="{{ object.attrs.name }}" />
+        </FormattedString>
+    </Label>
+    <TextView row="1" col="0" colSpan="2" hint="Comment" text="{{ addNotification.comment }}" />
+    <Label row="2" col="0" text="Forced" />
+    <Switch row="2" col="1" margin="5" checked="{{ addNotification.forced }}" />
+    <Button row="3" col="0" text="Ok" tap="onNotificationOkTap" />
+    <Button row="3" col="1" text="Cancel" tap="onNotificationCloseTap" />
+</GridLayout>

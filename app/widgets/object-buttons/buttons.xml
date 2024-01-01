@@ -2,5 +2,5 @@
     <Button text="{{ (object.attrs.acknowledgement != 0 ? 'Remove ' : '') + 'Ack' }}" isEnabled="{{ object.attrs.state != 0 }}" tap="onAckTap" />
     <Button text="Check" tap="onCheckTap" />
     <Button text="Comment" tap="onCommentTap"  />
-    <Button text="Notify" />
+    <Button text="Notify" tap="onNotificationTap"  />
 </StackLayout>

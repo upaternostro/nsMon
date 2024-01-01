@@ -155,4 +155,24 @@ export class IcingaFacade {
 
        this.post('/v1/actions/add-comment', params, callback);
     }
+
+    notificationService(name, author, comment, force, callback) {
+        var params = this.serviceFilter(name);
+
+        params.author = author;
+        params.comment = comment;
+        if (force) params.force = force;
+
+        this.post('/v1/actions/send-custom-notification', params, callback);
+    }
+
+    notificationHost(name, author, comment, force, callback) {
+        var params = this.hostFilter(name);
+
+        params.author = author;
+        params.comment = comment;
+        if (force) params.force = force;
+
+       this.post('/v1/actions/send-custom-notification', params, callback);
+    }
 }

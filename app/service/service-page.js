@@ -60,3 +60,9 @@ export function onCommentTap() {
     model: page.bindingContext,
   });
 }
+
+export function onNotificationTap() {
+  openModal("~/widgets/add-notification/dialog", require("~/widgets/add-notification/dialog-service"), {
+    model: page.bindingContext,
+  });
+}
