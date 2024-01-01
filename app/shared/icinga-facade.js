@@ -135,4 +135,24 @@ export class IcingaFacade {
 
        this.post('/v1/actions/acknowledge-problem', params, callback);
     }
+
+    commentService(name, author, comment, expiry, callback) {
+        var params = this.serviceFilter(name);
+
+        params.author = author;
+        params.comment = comment;
+        if (expiry) params.expiry = expiry;
+
+        this.post('/v1/actions/add-comment', params, callback);
+    }
+
+    commentHost(name, author, comment, expiry, callback) {
+        var params = this.hostFilter(name);
+
+        params.author = author;
+        params.comment = comment;
+        if (expiry) params.expiry = expiry;
+
+       this.post('/v1/actions/add-comment', params, callback);
+    }
 }

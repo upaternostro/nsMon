@@ -10,7 +10,7 @@ export function onModalOpen(args) {
 
 export function onTimePickerOk(args) {
 // console.log('onTimePickerOk ' + TIME_DIALOG_CLOSE_OK + ' obj: ' + args.object.page.getViewById("timePicker").time);
-    model.addAck.notify({
+    model.notify({
         eventName: TIME_DIALOG_CLOSE_OK,
         object: args.object.page.getViewById("timePicker").time,
     });
@@ -19,7 +19,7 @@ export function onTimePickerOk(args) {
 
 export function onTimePickerCancel(args) {
 // console.log('onTimePickerCancel ' + TIME_DIALOG_CLOSE_CANCEL);
-    model.addAck.notify({
+    model.notify({
         eventName: TIME_DIALOG_CLOSE_CANCEL,
         object: null,
     });

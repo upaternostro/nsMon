@@ -10,7 +10,7 @@ export function onModalOpen(args) {
 
 export function onDatePickerOk(args) {
 // console.log('onDatePickerOk ' + DATE_DIALOG_CLOSE_OK + ' obj: ' + args.object.page.getViewById("datePicker").date);
-    model.addAck.notify({
+    model.notify({
         eventName: DATE_DIALOG_CLOSE_OK,
         object: args.object.page.getViewById("datePicker").date,
     });
@@ -19,7 +19,7 @@ export function onDatePickerOk(args) {
 
 export function onDatePickerCancel(args) {
 // console.log('onDatePickerCancel ' + DATE_DIALOG_CLOSE_CANCEL);
-    model.addAck.notify({
+    model.notify({
         eventName: DATE_DIALOG_CLOSE_CANCEL,
         object: null,
     });

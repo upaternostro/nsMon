@@ -1,0 +1,15 @@
+<GridLayout rows="auto,auto,auto,auto,auto" columns="auto,auto" class="modal-dialog">
+    <Label row="0" col="0" colSpan="2" class="object-detail-subtitle">
+        <FormattedString>
+            <Span text="Comment: " />
+            <Span text="{{ object.attrs.name }}" />
+        </FormattedString>
+    </Label>
+    <TextView row="1" col="0" colSpan="2" hint="Comment" text="{{ addComment.comment }}" />
+    <Label row="2" col="0" text="Use Expire Time" />
+    <Switch row="2" col="1" margin="5" checked="{{ addComment.useExpireTime }}" />
+    <Label id="date" row="3" col="0" text="{{ dateF(addComment.expireDate, 'dd/MM/yyyy') }}" visibility="{{ addComment.useExpireTime ? 'visible' : 'collapsed' }}" horizontalAlignment="right" paddingRight="5" tap="onDateTap" />
+    <Label id="time" row="3" col="1" text="{{ dateF(addComment.expireTime, 'HH:mm') }}" visibility="{{ addComment.useExpireTime ? 'visible' : 'collapsed' }}" paddingLeft="5" tap="onTimeTap" />
+    <Button row="4" col="0" text="Ok" tap="onCommentOkTap" />
+    <Button row="4" col="1" text="Cancel" tap="onCommentCloseTap" />
+</GridLayout>

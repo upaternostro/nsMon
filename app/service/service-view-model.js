@@ -4,7 +4,9 @@ export class ServiceViewModel extends Observable {
   #now;
   #service;
   #comments = new ObservableArray();
+  #dialogModel;
   #addAck;
+  #addComment;
 
   constructor(service) {
     super();
@@ -12,7 +14,9 @@ export class ServiceViewModel extends Observable {
     this.#now = new Date();
     this.#service = service;
     this.#comments.length = 0;
+    this.#dialogModel = null;
     this.#addAck = null;
+    this.#addComment = null;
   }
 
   get now() {
@@ -31,12 +35,26 @@ export class ServiceViewModel extends Observable {
     return this.#comments;
   }
 
+  get dialogModel() {
+    return this.#dialogModel;
+  }
+
   get addAck() {
     return this.#addAck;
   }
 
+  get addComment() {
+    return this.#addComment;
+  }
+
   set addAck(addAck) {
+    this.#dialogModel = addAck;
     this.#addAck = addAck;
+  }
+
+  set addComment(addComment) {
+    this.#dialogModel = addComment;
+    this.#addComment = addComment;
   }
 
   addComments(comment) {

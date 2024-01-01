@@ -55,3 +55,9 @@ export function onAckTap() {
     });
   }
 }
+
+export function onCommentTap() {
+  openModal("~/widgets/add-comment/dialog", require("~/widgets/add-comment/dialog-host"), {
+    model: page.bindingContext,
+  });
+}

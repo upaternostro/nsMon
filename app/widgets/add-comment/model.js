@@ -1,25 +1,19 @@
 import { Observable } from "@nativescript/core"
 import { DATE_DIALOG_CLOSE_OK, TIME_DIALOG_CLOSE_OK } from '~/shared/constants'
 
-export class AddAckViewModel extends Observable {
+export class AddCommentViewModel extends Observable {
     #containingModel;
     #comment;
-    #persistentComment;
     #useExpireTime;
     #expireTime;
-    #stickyAcknowledgement;
-    #sendNotification;
 
     constructor(containingModel) {
         super();
 
         this.#containingModel = containingModel;
         this.#comment = "";
-        this.#persistentComment = false;
         this.#useExpireTime = false;
         this.#expireTime = new Date();
-        this.#stickyAcknowledgement = false;
-        this.#sendNotification = true;
 
         this.#containingModel.on(DATE_DIALOG_CLOSE_OK, this.onDateDialogCloseOk.bind(this));
         this.#containingModel.on(TIME_DIALOG_CLOSE_OK, this.onTimeDialogCloseOk.bind(this));
@@ -27,10 +21,6 @@ export class AddAckViewModel extends Observable {
 
     get comment() {
         return this.#comment;
-    }
-
-    get persistentComment() {
-        return this.#persistentComment;
     }
 
     get useExpireTime() {
@@ -45,28 +35,15 @@ export class AddAckViewModel extends Observable {
         return this.#expireTime;
     }
 
-    get stickyAcknowledgement() {
-        return this.#stickyAcknowledgement;
-    }
-
-    get sendNotification() {
-        return this.#sendNotification;
-    }
-
     set comment(comment) {
         this.#comment = comment;
-        this.#containingModel.notifyPropertyChange('addAck.comment', this.#comment);
-    }
-
-    set persistentComment(persistentComment) {
-        this.#persistentComment = persistentComment;
-        this.#containingModel.notifyPropertyChange('addAck.persistentComment', this.#persistentComment);
+        this.#containingModel.notifyPropertyChange('addComment.comment', this.#comment);
     }
 
     set useExpireTime(useExpireTime) {
 // console.log('useExpireTime: set ' + useExpireTime);
         this.#useExpireTime = useExpireTime;
-        this.#containingModel.notifyPropertyChange('addAck.useExpireTime', this.#useExpireTime);
+        this.#containingModel.notifyPropertyChange('addComment.useExpireTime', this.#useExpireTime);
 // console.log('DONE');
     }
 
@@ -76,16 +53,6 @@ export class AddAckViewModel extends Observable {
 
     set expireTime(expireTime) {
         // do nothing (avoid console warnings) [logic in the event handler below]
-    }
-
-    set stickyAcknowledgement(stickyAcknowledgement) {
-        this.#stickyAcknowledgement = stickyAcknowledgement;
-        this.#containingModel.notifyPropertyChange('addAck.stickyAcknowledgement', this.#stickyAcknowledgement);
-    }
-
-    set sendNotification(sendNotification) {
-        this.#sendNotification = sendNotification;
-        this.#containingModel.notifyPropertyChange('addAck.sendNotification', this.#sendNotification);
     }
 
     onDateDialogCloseOk(args) {
@@ -100,7 +67,7 @@ export class AddAckViewModel extends Observable {
             this.#expireTime.getMilliseconds()
         );
 // console.log('onDateDialogCloseOk: ' + this.#expireTime);
-        this.#containingModel.notifyPropertyChange('addAck.expireDate', this.#expireTime);
+        this.#containingModel.notifyPropertyChange('addComment.expireDate', this.#expireTime);
     }
 
     onTimeDialogCloseOk(args) {
@@ -115,6 +82,6 @@ export class AddAckViewModel extends Observable {
             args.object.getMilliseconds()
         );
 // console.log('onTimeDialogCloseOk: ' + this.#expireTime);
-        this.#containingModel.notifyPropertyChange('addAck.expireTime', this.#expireTime);
+        this.#containingModel.notifyPropertyChange('addComment.expireTime', this.#expireTime);
    }
 }
