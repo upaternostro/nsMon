@@ -1,7 +1,7 @@
 import { NativeScriptConfig } from '@nativescript/core';
 
 export default {
-  id: 'org.nativescript.nsMon',
+  id: 'org.paternostro.nsMon',
   appPath: 'app',
   appResourcesPath: 'App_Resources',
   android: {
