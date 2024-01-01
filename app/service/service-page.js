@@ -28,7 +28,7 @@ export function onBackButtonTap(args) {
 export function commentsCB(obj) {
   if (obj) {
     for (const r of obj.results) {
-      page.bindingContext.addComment(r);
+      page.bindingContext.addComments(r);
     }
   }
 }

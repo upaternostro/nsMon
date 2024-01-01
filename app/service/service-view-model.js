@@ -39,7 +39,7 @@ export class ServiceViewModel extends Observable {
     this.#addAck = addAck;
   }
 
-  addComment(comment) {
+  addComments(comment) {
     this.#comments.push(comment);
     this.notifyPropertyChange('comments', this.#comments);
   }
