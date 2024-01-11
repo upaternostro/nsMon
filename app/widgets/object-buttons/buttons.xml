@@ -1,3 +1,4 @@
+<!-- Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later. -->
 <StackLayout orientation="horizontal">
     <Button text="{{ (object.attrs.acknowledgement != 0 ? 'Remove ' : '') + 'Ack' }}" isEnabled="{{ object.attrs.state != 0 }}" tap="onAckTap" />
     <Button text="Check" tap="onCheckTap" />

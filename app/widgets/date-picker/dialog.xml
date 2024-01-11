@@ -1,3 +1,4 @@
+<!-- Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later. -->
 <AbsoluteLayout class="shadeCover">
     <FlexboxLayout justifyContent="space-around" alignItems="center" width="100%" height="100%">
         <GridLayout rows="auto,auto,auto" columns="auto,auto" class="modal-dialog">

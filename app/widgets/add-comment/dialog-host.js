@@ -1,3 +1,4 @@
+// Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
 import { ApplicationSettings } from '@nativescript/core'
 import { closeModal, openModal } from '~/shared/modal'
 import { IcingaFacade } from '~/shared/icinga-facade';

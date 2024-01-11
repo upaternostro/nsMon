@@ -1,3 +1,4 @@
+<!-- Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later. -->
 <StackLayout>
     <Label class="object-detail-subtitle" text="Plugin Output" />
     <Label text="{{ object.attrs.last_check_result.output }}" textWrap="true" />

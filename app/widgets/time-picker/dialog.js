@@ -1,3 +1,4 @@
+// Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
 import { closeModal } from '~/shared/modal'
 import { TIME_DIALOG_CLOSE_OK, TIME_DIALOG_CLOSE_CANCEL } from '~/shared/constants'
 

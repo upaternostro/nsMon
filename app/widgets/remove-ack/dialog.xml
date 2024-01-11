@@ -1,3 +1,4 @@
+<!-- Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later. -->
 <GridLayout rows="auto, auto, auto" columns="auto, auto" class="modal-dialog">
     <Label row="0" col="0" colSpan="2" class="object-detail-subtitle" text="Remove acknowledgement" />
 	<Label row="1" col="0" colSpan="2" textWrap="true">

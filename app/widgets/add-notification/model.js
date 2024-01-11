@@ -1,3 +1,4 @@
+// Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
 import { Observable } from "@nativescript/core"
 
 export class AddNotificationViewModel extends Observable {

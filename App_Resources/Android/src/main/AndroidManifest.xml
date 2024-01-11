@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="__PACKAGE__">
 
