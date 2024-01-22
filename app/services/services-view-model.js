@@ -14,6 +14,10 @@ export class ServicesViewModel extends Observable {
 
   addService(s) {
     this.#services.push(s);
+    // Keep 'em sorted
+    this.#services.sort((a,b) => {
+      return a.compare(b);
+    });
   }
 
   get services() {

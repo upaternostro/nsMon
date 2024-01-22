@@ -14,6 +14,10 @@ export class HostsViewModel extends Observable {
 
   addHost(h) {
     this.#hosts.push(h);
+    // Keep 'em sorted
+    this.#hosts.sort((a,b) => {
+      return a.compare(b);
+    });
   }
 
   get hosts() {
