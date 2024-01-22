@@ -17,13 +17,13 @@
 
     <RootLayout>
         <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">
-            <Label row="0" colSpan="2" class="{{ 'host-detail-title ' + (host.attrs.state == 0 ? 'host-ok' : 'host-critical' ) }}" text="{{ host.name }}" />
+            <Label row="0" colSpan="2" class="{{ 'host-detail-title ' + (object.isOk ? 'host-ok' : 'host-critical' ) }}" text="{{ host.name }}" />
             <Label row="1" col="0" text="Hostname:" />
             <Label row="1" col="1" text="{{ host.name }}" />
             <Label row="2" col="0" text="IPv4:" />
             <Label row="2" col="1" text="{{ host.attrs.address }}" />
             <Label row="3" col="0" text="Acknowledged:" />
-            <Label row="3" col="1" text="{{ host.attrs.acknowledgement == 0 ? 'No' : 'Acknowledged' + (host.attrs.acknowledgement == 2 ? ' (Sticky)' : '') }}" />
+            <Label row="3" col="1" text="{{ object.isNotAcknowledged ? 'No' : 'Acknowledged' + (object.isStickyAcknowledged ? ' (Sticky)' : '') }}" />
             <objectButtons:buttons row="4" colSpan="2" />
             <Label row="5" colSpan="2" class="host-detail-subtitle" text="Check Execution" />
             <Label row="6" col="0" text="Command:" />
@@ -37,7 +37,7 @@
             <Label row="10" col="0" text="Check interval:" />
             <Label row="10" col="1" text="{{ dateFD(dateI2D({ start: new Date(0), end: new Date(host.attrs.check_interval * 1000) })) }}"/>
             <Label row="11" col="0" text="Check attempts:" />
-            <Label row="11" col="1" text="{{ host.attrs.check_attempt + '/' + host.attrs.max_check_attempts + ' (' + (host.attrs.state_type == 1 ? 'hard' : 'soft') + ' state)' }}" />
+            <Label row="11" col="1" text="{{ host.attrs.check_attempt + '/' + host.attrs.max_check_attempts + ' (' + (object.isHardState ? 'hard' : 'soft') + ' state)' }}" />
             <Label row="12" col="0" text="Execution time:" />
             <Label row="12" col="1" text="{{ dateFD(dateI2D({ start: new Date(0), end: new Date((host.attrs.last_check_result.execution_end - host.attrs.last_check_result.execution_start) * 1000) })) }}"/>
             <Label row="13" col="0" text="Flapping:" />

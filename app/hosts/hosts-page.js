@@ -4,6 +4,7 @@ import { Application, ApplicationSettings, Frame } from '@nativescript/core'
 import { SelectedPageService } from '~/shared/selected-page-service'
 import { HostsViewModel } from './hosts-view-model'
 import { IcingaFacade } from '~/shared/icinga-facade';
+import { IcingaObject } from '~/shared/icinga-object';
 
 var page;
 
@@ -27,7 +28,7 @@ export function onDrawerButtonTap(args) {
 export function hostsCB(obj) {
   if (obj) {
     for (const r of obj.results) {
-      page.bindingContext.addHost(r);
+      page.bindingContext.addHost(IcingaObject.assignObject(r));
     }
   }
 }

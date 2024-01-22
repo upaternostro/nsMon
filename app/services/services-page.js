@@ -4,6 +4,7 @@ import { Application, ApplicationSettings, Frame } from '@nativescript/core'
 import { SelectedPageService } from '~/shared/selected-page-service'
 import { ServicesViewModel } from './services-view-model'
 import { IcingaFacade } from '~/shared/icinga-facade';
+import { IcingaObject } from '~/shared/icinga-object';
 
 var page;
 
@@ -27,7 +28,7 @@ export function onDrawerButtonTap(args) {
 export function servicesCB(obj) {
   if (obj) {
     for (const r of obj.results) {
-      page.bindingContext.addService(r);
+      page.bindingContext.addService(IcingaObject.assignObject(r));
     }
   }
 }

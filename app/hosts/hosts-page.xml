@@ -19,8 +19,8 @@
         </GridLayout>
         <ListView row="1" height="100%" items="{{ hosts }}" width="100%" itemTap="onItemTap">
             <ListView.itemTemplate>
-                <GridLayout columns="auto,auto" class="{{ 'default-list-item ' + (attrs.state == 2 ? 'critical' : (attrs.state == 1 ? 'warning' : 'ok')) }}">
-                    <Label col="0" class="fas hosts-list-status-icon" text="{{ attrs.acknowledgement == 2 ? '&#xf1f6;' : (attrs.state == 2 ? '&#xf06a;' : '&#xf058;') }}" />
+                <GridLayout columns="auto,auto" class="{{ 'default-list-item ' + (isCritical ? 'critical' : (isWarning ? 'warning' : 'ok')) }}">
+                    <Label col="0" class="fas hosts-list-status-icon" text="{{ isStickyAcknowledged ? '&#xf1f6;' : (isCritical ? '&#xf06a;' : '&#xf058;') }}" />
                     <Label col="1" text="{{ attrs.name }}" />
                 </GridLayout>
             </ListView.itemTemplate>
