@@ -2,7 +2,7 @@
 import { Application, ApplicationSettings, Frame } from '@nativescript/core'
 
 import { SelectedPageService } from '~/shared/selected-page-service'
-import { ServicesViewModel } from './services-view-model'
+import { IcingaObjectsViewModel } from '~/shared/icinga-objects-view-model'
 import { IcingaFacade } from '~/shared/icinga-facade';
 import { IcingaObject } from '~/shared/icinga-object';
 
@@ -15,7 +15,7 @@ export function onNavigatingTo(args) {
   
   page = args.object;
   SelectedPageService.getInstance().updateSelectedPage('Services')
-  page.bindingContext = new ServicesViewModel();
+  page.bindingContext = new IcingaObjectsViewModel();
   
   populateServicesList(false);
 }
@@ -28,25 +28,25 @@ export function onDrawerButtonTap(args) {
 export function servicesCB(obj) {
   if (obj) {
     for (const r of obj.results) {
-      page.bindingContext.addService(IcingaObject.assignObject(r));
+      page.bindingContext.addObject(IcingaObject.assignObject(r));
     }
   }
 }
 
 export function onCheckedChange(args) {
-  const showAllServices = !page.bindingContext.showAllServices;
-  const svm = new ServicesViewModel();
+  const showAllObjects = !page.bindingContext.showAllObjects;
+  const svm = new IcingaObjectsViewModel();
 
-  svm.showAllServices = showAllServices;
+  svm.showAllObjects = showAllObjects;
   page.bindingContext = svm;
 
-  populateServicesList(showAllServices);
+  populateServicesList(showAllObjects);
 }
 
-function populateServicesList(showAllServices) {
+function populateServicesList(showAllObjects) {
   const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
 
-  if (showAllServices) {
+  if (showAllObjects) {
     icingaFacade.getServices(servicesCB);
   } else {
     icingaFacade.getServiceProblems(servicesCB);
