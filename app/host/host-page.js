@@ -1,7 +1,7 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
 import { Frame, ApplicationSettings } from '@nativescript/core'
 
-import { HostViewModel } from './host-view-model'
+import { IcingaObjectViewModel } from '~/shared/icinga-object-view-model'
 import { SelectedPageService } from '~/shared/selected-page-service'
 import { IcingaFacade } from '~/shared/icinga-facade';
 import { Toasty, ToastDuration } from '@triniwiz/nativescript-toasty';
@@ -15,11 +15,11 @@ export function onNavigatingTo(args) {
   }
   
   page = args.object
-  page.bindingContext = new HostViewModel(page.navigationContext.host)
+  page.bindingContext = new IcingaObjectViewModel(page.navigationContext.object)
   SelectedPageService.getInstance().updateSelectedPage('Host');
 
   const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-  icingaFacade.getHostComments(page.navigationContext.host.attrs.__name, commentsCB)
+  icingaFacade.getHostComments(page.navigationContext.object.attrs.__name, commentsCB)
 }
 
 export function onBackButtonTap(args) {
@@ -37,7 +37,7 @@ export function commentsCB(obj) {
 
 export function onCheckTap() {
   const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-  icingaFacade.rescheduleHostCheck(page.bindingContext.host.attrs.__name, checkCB);
+  icingaFacade.rescheduleHostCheck(page.bindingContext.object.attrs.__name, checkCB);
 }
 
 export function checkCB(obj) {
@@ -48,7 +48,7 @@ export function checkCB(obj) {
 }
 
 export function onAckTap() {
-  if (page.bindingContext.service.attrs.acknowledgement != 0) {
+  if (page.bindingContext.object.attrs.acknowledgement != 0) {
     openModal("~/widgets/remove-ack/dialog", require("~/widgets/remove-ack/dialog-host"));
   } else {
     openModal("~/widgets/add-ack/dialog", require("~/widgets/add-ack/dialog-host"), {

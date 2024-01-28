@@ -1,20 +1,20 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
 import { Observable, ObservableArray } from "@nativescript/core"
 
-export class ServiceViewModel extends Observable {
+export class IcingaObjectViewModel extends Observable {
   #now;
-  #service;
+  #object;
   #comments = new ObservableArray();
   #dialogModel;
   #addAck;
   #addComment;
   #addNotification;
 
-  constructor(service) {
+  constructor(object) {
     super();
 
     this.#now = new Date();
-    this.#service = service;
+    this.#object = object;
     this.#comments.length = 0;
     this.#dialogModel = null;
     this.#addAck = null;
@@ -26,12 +26,8 @@ export class ServiceViewModel extends Observable {
     return this.#now;
   }
 
-  get service() {
-    return this.#service;
-  }
-
   get object() {
-    return this.#service;
+    return this.#object;
   }
 
   get comments() {

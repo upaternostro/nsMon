@@ -56,6 +56,6 @@ function populateHostsList(showAllObjects) {
 export function onItemTap(args) {
   Frame.topmost().navigate({
     moduleName: 'host/host-page',
-    context: { host: page.bindingContext.getItem(args.index) }
+    context: { object: page.bindingContext.getItem(args.index) }
   })
 }
