@@ -5,9 +5,14 @@ export const TIME_DIALOG_CLOSE_OK       = "time-dialog-close-ok";
 export const TIME_DIALOG_CLOSE_CANCEL   = "time-dialog-close-cancel";
 
 export const STATE_OK                   = 0;
-export const STATE_WARNING              = 1;
-export const STATE_CRITICAL             = 2;
-export const STATE_UNKNOWN              = 3;
+
+export const STATE_SERVICE_OK           = STATE_OK;
+export const STATE_SERVICE_WARNING      = 1;
+export const STATE_SERVICE_CRITICAL     = 2;
+export const STATE_SERVICE_UNKNOWN      = 3;
+
+export const STATE_HOST_OK              = STATE_OK;
+export const STATE_HOST_DOWN            = 1;
 
 export const NOT_ACKNOWLEDGED           = 0;
 export const ACKNOWLEDGED               = 1;

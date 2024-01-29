@@ -1,5 +1,5 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { STATE_OK, STATE_WARNING, STATE_CRITICAL, STATE_UNKNOWN, NOT_ACKNOWLEDGED, STICKY_ACKNOWLEDGED, HARD_STATE } from '~/shared/constants'
+import { STATE_OK, STATE_SERVICE_WARNING, STATE_SERVICE_CRITICAL, STATE_SERVICE_UNKNOWN, NOT_ACKNOWLEDGED, STICKY_ACKNOWLEDGED, HARD_STATE, STATE_HOST_DOWN } from '~/shared/constants'
 
 /**
  * @abstract
@@ -48,18 +48,6 @@ export class IcingaObject {
         return this.attrs.state == STATE_OK;
     }
 
-    get isWarning() {
-        return this.attrs.state == STATE_WARNING;
-    }
-
-    get isCritical() {
-        return this.attrs.state == STATE_CRITICAL;
-    }
-
-    get isUnknown() {
-        return this.attrs.state == STATE_UNKNOWN;
-    }
-
     get isNotAcknowledged() {
         return this.attrs.acknowledgement == NOT_ACKNOWLEDGED;
     }
@@ -95,6 +83,10 @@ export class IcingaHost extends IcingaObject {
         super('Host');
     }
 
+    get isDown() {
+        return this.attrs.state == STATE_HOST_DOWN;
+    }
+
     compare(other) {
         var c = super.compare(other);
         if (c != 0) return c;
@@ -109,6 +101,18 @@ export class IcingaHost extends IcingaObject {
 export class IcingaService extends IcingaObject {
     constructor() {
         super('Service');
+    }
+
+    get isWarning() {
+        return this.attrs.state == STATE_SERVICE_WARNING;
+    }
+
+    get isCritical() {
+        return this.attrs.state == STATE_SERVICE_CRITICAL;
+    }
+
+    get isUnknown() {
+        return this.attrs.state == STATE_SERVICE_UNKNOWN;
     }
 
     compare(other) {
