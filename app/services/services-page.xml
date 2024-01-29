@@ -20,7 +20,7 @@
         <ListView row="1" height="100%" items="{{ objects }}" width="100%" itemTap="onItemTap">
             <ListView.itemTemplate>
                 <GridLayout columns="auto,auto,auto" class="{{ 'default-list-item ' + (isUnknown ? 'unknown' : (isCritical ? 'critical' : (isWarning ? 'warning' : 'ok'))) }}">
-                    <Label col="0" class="fas services-list-status-icon" text="{{ isStickyAcknowledged ? '&#xf1f6;' : (isCritical ? '&#xf06a;' : '&#xf071;') }}" />
+                    <Label col="0" class="fas services-list-status-icon" text="{{ isStickyAcknowledged ? '&#xf1f6;' : (!isOk ? '&#xf06a;' : '&#xf058;') }}" />
                     <Label col="1" text="{{ attrs.name }}" />
                     <Label col="2" text="{{ attrs.host_name }}" />
                 </GridLayout>
