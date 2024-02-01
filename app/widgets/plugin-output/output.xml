@@ -2,4 +2,12 @@
 <StackLayout>
     <Label class="object-detail-subtitle" text="Plugin Output" />
     <Label text="{{ object.attrs.last_check_result.output }}" textWrap="true" />
+    <StackLayout visibility="{{ object.attrs.last_check_result.performance_data.length > 0 ? 'visible' : 'collapsed' }}">
+        <Label class="object-detail-subtitle" text="Performance data" />
+        <ListView items="{{ object.attrs.last_check_result.performance_data }}" width="100%" height="50">
+            <ListView.itemTemplate>
+                <Label textWrap="true" padding="0" text="{{ $value }}" />
+            </ListView.itemTemplate>
+        </ListView>
+    </StackLayout>
 </StackLayout>
