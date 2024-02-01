@@ -1,11 +1,12 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Application } from '@nativescript/core'
+import { Application, ApplicationSettings } from '@nativescript/core'
 import { format, intervalToDuration, formatDuration } from 'date-fns'
 
 Application.setResources({ 
   dateF: format,
   dateI2D: intervalToDuration,
   dateFD: formatDuration,
+  AS: ApplicationSettings,
  });
 
 Application.run({ moduleName: 'app-root/app-root' })

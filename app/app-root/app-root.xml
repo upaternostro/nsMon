@@ -13,8 +13,8 @@
         <GridLayout rows="auto, *" class="nt-drawer__content">
             <StackLayout class="nt-drawer__header">
                 <Image class="nt-drawer__header-image fas t-36" src="font://&#xf2bd;" />
-                <Label class="nt-drawer__header-brand" text="User Name" />
-                <Label class="nt-drawer__header-footnote" text="username@mail.com" />
+                <Label class="nt-drawer__header-brand" text="{{ AS.getString('username') }}" textWrap="true" />
+                <Label class="nt-drawer__header-footnote" text="{{ AS.getString('url') }}" textWrap="true" />
             </StackLayout>
 
             <ScrollView row="1">
