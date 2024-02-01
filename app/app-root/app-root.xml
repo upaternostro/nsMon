@@ -32,17 +32,6 @@
 
                     <GridLayout
             columns="auto, *"
-            class="{{ 'nt-drawer__list-item' + (selectedPage === 'Services' ? ' -selected': '') }}"
-            route="services/services-page"
-            title="Services"
-            tap="onNavigationItemTap"
-          >
-                        <Label row="0" col="0" text="&#xf1ea;" class="nt-icon far" />
-                        <Label row="0" col="1" text="Services" class="p-r-10" />
-                    </GridLayout>
-
-                    <GridLayout
-            columns="auto, *"
             class="{{ 'nt-drawer__list-item' + (selectedPage === 'Hosts' ? ' -selected': '') }}"
             route="hosts/hosts-page"
             title="Hosts"
@@ -50,6 +39,17 @@
           >
                         <Label row="0" col="0" text="&#xf002;" class="nt-icon fas" />
                         <Label row="0" col="1" text="Hosts" class="p-r-10" />
+                    </GridLayout>
+
+                    <GridLayout
+            columns="auto, *"
+            class="{{ 'nt-drawer__list-item' + (selectedPage === 'Services' ? ' -selected': '') }}"
+            route="services/services-page"
+            title="Services"
+            tap="onNavigationItemTap"
+          >
+                        <Label row="0" col="0" text="&#xf1ea;" class="nt-icon far" />
+                        <Label row="0" col="1" text="Services" class="p-r-10" />
                     </GridLayout>
 
                     <StackLayout class="hr" />
