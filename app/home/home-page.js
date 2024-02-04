@@ -16,9 +16,7 @@ export function onNavigatingTo(args) {
   SelectedPageService.getInstance().updateSelectedPage('Home')
   page.bindingContext = new HomeViewModel();
 
-  const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-
-  icingaFacade.getStatus(statusCB);
+  IcingaFacade.getInstance().getStatus(statusCB);
 }
 
 export function onDrawerButtonTap(args) {

@@ -44,12 +44,10 @@ export function onCheckedChange(args) {
 }
 
 function populateServicesList(showAllObjects) {
-  const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-
   if (showAllObjects) {
-    icingaFacade.getServices(servicesCB);
+    IcingaFacade.getInstance().getServices(servicesCB);
   } else {
-    icingaFacade.getServiceProblems(servicesCB);
+    IcingaFacade.getInstance().getServiceProblems(servicesCB);
   }
 }
 

@@ -1,23 +1,26 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Http } from '@nativescript/core'
+import { Http, ApplicationSettings } from '@nativescript/core'
 import { encode } from 'base-64'
 
 export class IcingaFacade {
-    #url;
-    #username;
-    #password;
+    static #_instance;
+
+    static getInstance() {
+        if (IcingaFacade.#_instance == null) {
+            IcingaFacade.#_instance = new IcingaFacade();
+        }
+
+        return IcingaFacade.#_instance;
+    }
     
-    constructor(url, username, password) {
-        this.#url = url;
-        this.#username = username;
-        this.#password = password;
+    constructor() {
     }
 
     request(path, callback) {
         const requestOptions = {
-            url: this.#url + path,
+            url: ApplicationSettings.getString('url') + path,
             method: 'GET',
-            headers: { 'Authorization': 'Basic ' + encode(this.#username + ':' + this.#password) },
+            headers: { 'Authorization': 'Basic ' + encode(ApplicationSettings.getString('username') + ':' + ApplicationSettings.getString('password')) },
         };
           
         Http.request(requestOptions).then(result => {
@@ -61,10 +64,11 @@ export class IcingaFacade {
 
     post(path, content, callback) {
         const requestOptions = {
-            url: this.#url + path,
+            url: ApplicationSettings.getString('url') + path,
             method: 'POST',
             headers: { 
-                'Authorization': 'Basic ' + encode(this.#username + ':' + this.#password),
+                'Authorization': 'Basic ' + encode(ApplicationSettings.getString('username') + ':' + ApplicationSettings.getString('password')),
+//                "Content-Type": "application/json",
                 "Accept": "application/json",
             },
             content: JSON.stringify(content),

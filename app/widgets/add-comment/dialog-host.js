@@ -15,9 +15,7 @@ export function onModalOpen(args) {
 export function onCommentOkTap(args) {
 // console.log('onCommentOkTap HOST');
 // console.log('onCommentOkTap: ' + JSON.stringify(args.object.page.bindingContext.object.attrs.__name, null, 4));
-    const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-
-    icingaFacade.commentHost(model.object.attrs.__name,
+    IcingaFacade.getInstance().commentHost(model.object.attrs.__name,
         ApplicationSettings.getString('username'), 
         model.addComment.comment,
         model.addComment.useExpireTime ? model.addComment.expireTime : null,

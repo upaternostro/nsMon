@@ -15,9 +15,7 @@ export function onModalOpen(args) {
 export function onAckOkTap(args) {
 // console.log('onAckOkTap HOST');
 // console.log('onAckOkTap: ' + JSON.stringify(args.object.page.bindingContext.object.attrs.__name, null, 4));
-    const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-
-    icingaFacade.acknowledgeHostProblem(model.object.attrs.__name,
+    IcingaFacade.getInstance().acknowledgeHostProblem(model.object.attrs.__name,
         ApplicationSettings.getString('username'), 
         model.addAck.comment,
         model.addAck.useExpireTime ? model.addAck.expireTime : null,

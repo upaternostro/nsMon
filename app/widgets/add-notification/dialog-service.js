@@ -12,9 +12,7 @@ export function onModalOpen(args) {
 }
 
 export function onNotificationOkTap(args) {
-    const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-
-    icingaFacade.notificationService(model.object.attrs.__name,
+    IcingaFacade.getInstance().notificationService(model.object.attrs.__name,
         ApplicationSettings.getString('username'), 
         model.addNotification.comment,
         model.addNotification.forced,

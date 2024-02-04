@@ -18,8 +18,7 @@ export function onNavigatingTo(args) {
   page.bindingContext = new IcingaObjectViewModel(page.navigationContext.object)
   SelectedPageService.getInstance().updateSelectedPage('Host');
 
-  const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-  icingaFacade.getHostComments(page.navigationContext.object.attrs.__name, commentsCB)
+  IcingaFacade.getInstance().getHostComments(page.navigationContext.object.attrs.__name, commentsCB)
 }
 
 export function onBackButtonTap(args) {
@@ -36,8 +35,7 @@ export function commentsCB(obj) {
 }
 
 export function onCheckTap() {
-  const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-  icingaFacade.rescheduleHostCheck(page.bindingContext.object.attrs.__name, checkCB);
+  IcingaFacade.getInstance().rescheduleHostCheck(page.bindingContext.object.attrs.__name, checkCB);
 }
 
 export function checkCB(obj) {

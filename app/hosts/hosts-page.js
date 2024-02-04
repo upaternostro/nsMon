@@ -44,12 +44,10 @@ export function onCheckedChange(args) {
 }
 
 function populateHostsList(showAllObjects) {
-  const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-
   if (showAllObjects) {
-    icingaFacade.getHosts(hostsCB);
+    IcingaFacade.getInstance().getHosts(hostsCB);
   } else {
-    icingaFacade.getHostProblems(hostsCB);
+    IcingaFacade.getInstance().getHostProblems(hostsCB);
   }
 }
 

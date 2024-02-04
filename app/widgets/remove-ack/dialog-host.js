@@ -6,8 +6,7 @@ import { IcingaFacade } from '~/shared/icinga-facade';
 export function onAckOkTap(args) {
 // console.log('onAckOkTap HOST');
 // console.log('onAckOkTap: ' + JSON.stringify(args.object.page.bindingContext.object.attrs.__name, null, 4));
-    const icingaFacade = new IcingaFacade(ApplicationSettings.getString('url'), ApplicationSettings.getString('username'), ApplicationSettings.getString('password'));
-    icingaFacade.removeHostAck(args.object.page.bindingContext.object.attrs.__name, removeAckCB);
+    IcingaFacade.getInstance().removeHostAck(args.object.page.bindingContext.object.attrs.__name, removeAckCB);
     closeModal();
 }
 
