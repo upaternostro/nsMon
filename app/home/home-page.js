@@ -34,4 +34,6 @@ export function statusCB(obj) {
       }
     }
   }
+
+  page.bindingContext.busy = false;
 }

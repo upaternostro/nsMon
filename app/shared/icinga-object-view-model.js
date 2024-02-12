@@ -1,7 +1,8 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Observable, ObservableArray } from "@nativescript/core"
+import { ObservableArray } from "@nativescript/core"
+import { BusyIndicatorViewModel } from '~/shared/busy-indicator-view-model'
 
-export class IcingaObjectViewModel extends Observable {
+export class IcingaObjectViewModel extends BusyIndicatorViewModel {
   #now;
   #object;
   #comments = new ObservableArray();

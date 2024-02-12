@@ -26,5 +26,6 @@
                 </GridLayout>
             </ListView.itemTemplate>
         </ListView>
+        <ActivityIndicator row="0" rowSpan="2" busy="{{ isBusy }}" />
     </GridLayout>
 </Page>

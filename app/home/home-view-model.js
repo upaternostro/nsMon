@@ -1,7 +1,7 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Observable } from '@nativescript/core'
+import { BusyIndicatorViewModel } from '~/shared/busy-indicator-view-model'
 
-export class HomeViewModel extends Observable {
+export class HomeViewModel extends BusyIndicatorViewModel {
   #icingaApplication;
   #cIB;
 

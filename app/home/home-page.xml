@@ -40,5 +40,6 @@
                 <Span text="{{ cIB.status.num_services_warning }}" style="color: orange" />
             </FormattedString>
         </Label>
+        <ActivityIndicator row="0" rowSpan="6" colSpan="2" busy="{{ isBusy }}" />
     </GridLayout>
 </Page>

@@ -31,6 +31,8 @@ export function commentsCB(obj) {
       page.bindingContext.addComments(r);
     }
   }
+
+  page.bindingContext.busy = false;
 }
 
 export function onCheckTap() {

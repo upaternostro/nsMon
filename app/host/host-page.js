@@ -32,6 +32,8 @@ export function commentsCB(obj) {
 // console.log(r.attrs.text)
     }
   }
+  
+  page.bindingContext.busy = false;
 }
 
 export function onCheckTap() {

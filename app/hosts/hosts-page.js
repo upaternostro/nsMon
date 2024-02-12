@@ -31,6 +31,8 @@ export function hostsCB(obj) {
       page.bindingContext.addObject(IcingaObject.assignObject(r));
     }
   }
+
+  page.bindingContext.busy = false;
 }
 
 export function onCheckedChange(args) {

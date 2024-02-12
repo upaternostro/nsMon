@@ -26,9 +26,12 @@ export class IcingaFacade {
         Http.request(requestOptions).then(result => {
             if (result.statusCode == 200) {
               callback(JSON.parse(result.content));
+            } else {
+                callback(null);
             }
         }, error => {
             console.log(error);
+            callback(null);
         });
 
         return null;

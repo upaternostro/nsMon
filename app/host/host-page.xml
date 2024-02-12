@@ -44,6 +44,7 @@
             <Label row="13" col="1" text="{{ object.attrs.flapping ? 'Yes' : 'No' }}" />
             <pluginOutput:output row="14" colSpan="2" />
             <comments:comments row="15" colSpan="2" />
+            <ActivityIndicator row="0" rowSpan="16" colSpan="2" busy="{{ isBusy }}" />
         </GridLayout>
     </RootLayout>
 </Page>
