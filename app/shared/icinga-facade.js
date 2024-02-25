@@ -1,6 +1,7 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Http, ApplicationSettings } from '@nativescript/core'
+import { Http, ApplicationSettings, Frame } from '@nativescript/core'
 import { encode } from 'base-64'
+import { Toasty, ToastDuration } from '@triniwiz/nativescript-toasty';
 
 export class IcingaFacade {
     static #_instance;
@@ -16,6 +17,17 @@ export class IcingaFacade {
     constructor() {
     }
 
+    requestErrorHandler(error) {
+        console.error(error);
+        new Toasty({ 
+            text: error.toString(),
+            duration: ToastDuration.LONG,
+        }).show();
+        Frame.topmost().navigate({
+            moduleName: 'settings/settings-page',
+        })
+    }
+
     request(path, callback) {
         const requestOptions = {
             url: ApplicationSettings.getString('url') + path,
@@ -25,12 +37,12 @@ export class IcingaFacade {
           
         Http.request(requestOptions).then(result => {
             if (result.statusCode == 200) {
-              callback(JSON.parse(result.content));
+                callback(JSON.parse(result.content));
             } else {
                 callback(null);
             }
         }, error => {
-            console.log(error);
+            this.requestErrorHandler(error);
             callback(null);
         });
 
@@ -79,10 +91,13 @@ export class IcingaFacade {
 
         Http.request(requestOptions).then(result => {
             if (result.statusCode == 200) {
-              callback(JSON.parse(result.content));
+                callback(JSON.parse(result.content));
+            } else {
+                callback(null);
             }
         }, error => {
-            console.log(error);
+            this.requestErrorHandler(error);
+            callback(null);
         });
 
         return null;
