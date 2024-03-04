@@ -45,17 +45,28 @@ export class IcingaFacade {
         };
           
         Http.request(requestOptions).then(result => {
-            if (result.statusCode == 200) {
-                callback(JSON.parse(result.content));
-            } else {
-                callback(null);
+            let callbackParameter = null;
+
+// console.log('IcingaFacade.request: statusCode: ' + result.statusCode);
+// console.log('IcingaFacade.request: response: ' + result.content);
+            switch (result.statusCode) {
+                case 200:
+// console.log('response: ' + JSON.stringify(result.content, null, 4));
+                    callbackParameter = JSON.parse(result.content);
+                    break;
+                case 401:
+                    this.requestErrorHandler("Unauthorized user " + ApplicationSettings.getString('username'));
+                    break;
+                case 404:
+                    this.requestErrorHandler("Not found (check URL " + requestOptions.url + ")");
+                    break;
             }
+
+            callback(callbackParameter);
         }, error => {
             this.requestErrorHandler(error);
             callback(null);
         });
-
-        return null;
     }
 
     getHosts(callback) {
@@ -99,17 +110,26 @@ export class IcingaFacade {
         };
 
         Http.request(requestOptions).then(result => {
-            if (result.statusCode == 200) {
-                callback(JSON.parse(result.content));
-            } else {
-                callback(null);
+            let callbackParameter = null;
+
+// console.log('result: ' + JSON.stringify(result, null, 4));
+            switch (result.statusCode) {
+                case 200:
+                    callbackParameter = JSON.parse(result.content);
+                    break;
+                case 401:
+                    this.requestErrorHandler("Unauthorized user " + ApplicationSettings.getString('username'));
+                    break;
+                case 404:
+                    this.requestErrorHandler("Not found (check URL " + requestOptions.url + ")");
+                    break;
             }
+
+            callback(callbackParameter);
         }, error => {
             this.requestErrorHandler(error);
             callback(null);
         });
-
-        return null;
     }
 
     serviceFilter(name) {
