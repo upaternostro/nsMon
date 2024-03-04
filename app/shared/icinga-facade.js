@@ -37,7 +37,7 @@ export class IcingaFacade {
         }
     }
 
-    request(path, callback) {
+    get(path, callback) {
         const requestOptions = {
             url: ApplicationSettings.getString('url') + path,
             method: 'GET',
@@ -70,31 +70,31 @@ export class IcingaFacade {
     }
 
     getHosts(callback) {
-        this.request('/v1/objects/hosts', callback);
+        this.get('/v1/objects/hosts', callback);
     }
 
     getHostProblems(callback) {
-        this.request('/v1/objects/hosts?filter=host.problem', callback);
+        this.get('/v1/objects/hosts?filter=host.problem', callback);
     }
 
     getServices(callback) {
-        this.request('/v1/objects/services?joins=host.address&joins=host.address6', callback);
+        this.get('/v1/objects/services?joins=host.address&joins=host.address6', callback);
     }
 
     getServiceProblems(callback) {
-        this.request('/v1/objects/services?filter=service.problem&joins=host.address&joins=host.address6', callback);
+        this.get('/v1/objects/services?filter=service.problem&joins=host.address&joins=host.address6', callback);
     }
 
     getStatus(callback) {
-        this.request('/v1/status', callback);
+        this.get('/v1/status', callback);
     }
 
     getServiceComments(serviceName, callback) {
-        this.request('/v1/objects/comments?joins=service.__name&filter=service.__name==%22' + serviceName + '%22', callback);
+        this.get('/v1/objects/comments?joins=service.__name&filter=service.__name==%22' + serviceName + '%22', callback);
     }
 
     getHostComments(hostName, callback) {
-        this.request('/v1/objects/comments?joins=host.__name&filter=host.__name==%22' + hostName + '%22', callback);
+        this.get('/v1/objects/comments?joins=host.__name&filter=host.__name==%22' + hostName + '%22', callback);
     }
 
     post(path, content, callback) {
