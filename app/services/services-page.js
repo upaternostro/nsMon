@@ -7,6 +7,7 @@ import { IcingaFacade } from '~/shared/icinga-facade';
 import { IcingaObject } from '~/shared/icinga-object';
 
 var page;
+var pullRefresh = null;
 
 export function onNavigatingTo(args) {
   if (args.isBackNavigation) {
@@ -33,6 +34,10 @@ export function servicesCB(obj) {
   }
 
   page.bindingContext.busy = false;
+  
+  if (pullRefresh) {
+    pullRefresh.refreshing = false;
+  }
 }
 
 export function onCheckedChange(args) {
@@ -58,4 +63,12 @@ export function onItemTap(args) {
     moduleName: 'service/service-page',
     context: { object: page.bindingContext.getItem(args.index) }
   })
+}
+
+export function onRefresh(args) {
+  const showAllObjects = page.bindingContext.showAllObjects;
+
+  pullRefresh = args.object;
+  page.bindingContext.clearObjects();
+  populateServicesList(showAllObjects);
 }

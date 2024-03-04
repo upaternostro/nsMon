@@ -13,6 +13,10 @@ export class IcingaObjectsViewModel extends BusyIndicatorViewModel {
     this.#showAllObjects = false;
   }
 
+  clearObjects() {
+    this.#objects.length = 0;
+  }
+
   addObject(o) {
     this.#objects.push(o);
     // Keep 'em sorted

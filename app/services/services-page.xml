@@ -1,7 +1,8 @@
 <!-- Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later. -->
 <Page
     navigatingTo="onNavigatingTo"
-    xmlns="http://schemas.nativescript.org/tns.xsd">
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:p2r="@nativescript-community/ui-pulltorefresh">
 
     <ActionBar>
         <NavigationButton visibility="hidden"></NavigationButton>
@@ -11,21 +12,23 @@
         </GridLayout>
     </ActionBar>
 
-    <GridLayout class="page__content" rows="auto,*">
-        <GridLayout row="0" columns="auto,*,auto">
-            <Label col="0" class="action-bar-title" text="Show all services" />
-            <!-- col 1 is empty -->
-            <Switch col="2" checked="{{ showAllObjects }}" checkedChange="onCheckedChange" />
+    <p2r:PullToRefresh refresh="onRefresh">
+        <GridLayout class="page__content" rows="auto,*">
+            <GridLayout row="0" columns="auto,*,auto">
+                <Label col="0" class="action-bar-title" text="Show all services" />
+                <!-- col 1 is empty -->
+                <Switch col="2" checked="{{ showAllObjects }}" checkedChange="onCheckedChange" />
+            </GridLayout>
+            <ListView row="1" height="100%" items="{{ objects }}" width="100%" itemTap="onItemTap">
+                <ListView.itemTemplate>
+                    <GridLayout columns="auto,auto,auto" class="{{ 'default-list-item ' + (isUnknown ? 'unknown' : (isCritical ? 'critical' : (isWarning ? 'warning' : 'ok'))) }}">
+                        <Label col="0" class="fas services-list-status-icon" text="{{ isStickyAcknowledged ? '&#xf1f6;' : (!isOk ? '&#xf06a;' : '&#xf058;') }}" />
+                        <Label col="1" text="{{ attrs.name }}" />
+                        <Label col="2" text="{{ attrs.host_name }}" />
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+            <ActivityIndicator row="0" rowSpan="2" busy="{{ isBusy }}" />
         </GridLayout>
-        <ListView row="1" height="100%" items="{{ objects }}" width="100%" itemTap="onItemTap">
-            <ListView.itemTemplate>
-                <GridLayout columns="auto,auto,auto" class="{{ 'default-list-item ' + (isUnknown ? 'unknown' : (isCritical ? 'critical' : (isWarning ? 'warning' : 'ok'))) }}">
-                    <Label col="0" class="fas services-list-status-icon" text="{{ isStickyAcknowledged ? '&#xf1f6;' : (!isOk ? '&#xf06a;' : '&#xf058;') }}" />
-                    <Label col="1" text="{{ attrs.name }}" />
-                    <Label col="2" text="{{ attrs.host_name }}" />
-                </GridLayout>
-            </ListView.itemTemplate>
-        </ListView>
-        <ActivityIndicator row="0" rowSpan="2" busy="{{ isBusy }}" />
-    </GridLayout>
+    </p2r:PullToRefresh>
 </Page>

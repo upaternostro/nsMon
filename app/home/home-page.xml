@@ -1,7 +1,8 @@
 <!-- Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later. -->
 <Page
     navigatingTo="onNavigatingTo"
-    xmlns="http://schemas.nativescript.org/tns.xsd">
+    xmlns="http://schemas.nativescript.org/tns.xsd"
+    xmlns:p2r="@nativescript-community/ui-pulltorefresh">
 
     <ActionBar>
         <NavigationButton visibility="hidden"></NavigationButton>
@@ -11,35 +12,37 @@
         </GridLayout>
     </ActionBar>
 
-    <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto" class="page__content">
-        <Label col="0" row="0" text="Node name:"/>
-        <Label col="1" row="0" text="{{ icingaApplication.status.icingaapplication.app.node_name }}"/>
-        <Label col="0" row="1" text="Version:"/>
-        <Label col="1" row="1" text="{{ icingaApplication.status.icingaapplication.app.version }}"/>
-        <Label col="0" row="2" text="Since:"/>
-        <Label col="1" row="2" text="{{ icingaApplication.status.icingaapplication.app.program_start ? dateF(new Date(icingaApplication.status.icingaapplication.app.program_start*1000), 'dd/MM/yyyy HH:mm:ss') : '' }}"/>
-        <Label col="0" row="3" text="Uptime:"/>
-        <Label col="1" row="3" text="{{ dateFD(dateI2D({ start: new Date(0), end: new Date(cIB.status.uptime * 1000) })) }}"/>
-        <Label col="0" row="4" text="Flags:"/>
-        <Label col="1" row="4" text="{{ icingaApplication.status.icingaapplication.app.enable_host_checks }}"/>
-        <Label col="0" row="5" text="Hosts:"/>
-        <Label col="1" row="5">
-            <FormattedString>
-                <Span text="{{ cIB.status.num_hosts_up + cIB.status.num_hosts_problem }}" />
-                <Span text="/" />
-                <Span text="{{ cIB.status.num_hosts_down }}" style="color: red" />
-            </FormattedString>
-        </Label>
-        <Label col="0" row="6" text="Services:"/>
-        <Label col="1" row="6">
-            <FormattedString>
-                <Span text="{{ cIB.status.num_services_ok + cIB.status.num_services_problem }}" />
-                <Span text="/" />
-                <Span text="{{ cIB.status.num_services_critical }}" style="color: red" />
-                <Span text="/" />
-                <Span text="{{ cIB.status.num_services_warning }}" style="color: orange" />
-            </FormattedString>
-        </Label>
-        <ActivityIndicator row="0" rowSpan="6" colSpan="2" busy="{{ isBusy }}" />
-    </GridLayout>
+    <p2r:PullToRefresh refresh="onRefresh">
+        <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto" class="page__content">
+            <Label col="0" row="0" text="Node name:"/>
+            <Label col="1" row="0" text="{{ icingaApplication.status.icingaapplication.app.node_name }}"/>
+            <Label col="0" row="1" text="Version:"/>
+            <Label col="1" row="1" text="{{ icingaApplication.status.icingaapplication.app.version }}"/>
+            <Label col="0" row="2" text="Since:"/>
+            <Label col="1" row="2" text="{{ icingaApplication.status.icingaapplication.app.program_start ? dateF(new Date(icingaApplication.status.icingaapplication.app.program_start*1000), 'dd/MM/yyyy HH:mm:ss') : '' }}"/>
+            <Label col="0" row="3" text="Uptime:"/>
+            <Label col="1" row="3" text="{{ dateFD(dateI2D({ start: new Date(0), end: new Date(cIB.status.uptime * 1000) })) }}"/>
+            <Label col="0" row="4" text="Flags:"/>
+            <Label col="1" row="4" text="{{ icingaApplication.status.icingaapplication.app.enable_host_checks }}"/>
+            <Label col="0" row="5" text="Hosts:"/>
+            <Label col="1" row="5">
+                <FormattedString>
+                    <Span text="{{ cIB.status.num_hosts_up + cIB.status.num_hosts_problem }}" />
+                    <Span text="/" />
+                    <Span text="{{ cIB.status.num_hosts_down }}" style="color: red" />
+                </FormattedString>
+            </Label>
+            <Label col="0" row="6" text="Services:"/>
+            <Label col="1" row="6">
+                <FormattedString>
+                    <Span text="{{ cIB.status.num_services_ok + cIB.status.num_services_problem }}" />
+                    <Span text="/" />
+                    <Span text="{{ cIB.status.num_services_critical }}" style="color: red" />
+                    <Span text="/" />
+                    <Span text="{{ cIB.status.num_services_warning }}" style="color: orange" />
+                </FormattedString>
+            </Label>
+            <ActivityIndicator row="0" rowSpan="7" colSpan="2" busy="{{ isBusy }}" />
+        </GridLayout>
+    </p2r:PullToRefresh>
 </Page>

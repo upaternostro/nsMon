@@ -6,6 +6,7 @@ import { HomeViewModel } from './home-view-model'
 import { IcingaFacade } from '~/shared/icinga-facade';
 
 var page;
+var pullRefresh = null;
 
 export function onNavigatingTo(args) {
   if (args.isBackNavigation) {
@@ -36,4 +37,13 @@ export function statusCB(obj) {
   }
 
   page.bindingContext.busy = false;
+  
+  if (pullRefresh) {
+    pullRefresh.refreshing = false;
+  }
+}
+
+export function onRefresh(args) {
+  pullRefresh = args.object;
+  IcingaFacade.getInstance().getStatus(statusCB);
 }
