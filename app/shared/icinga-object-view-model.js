@@ -21,6 +21,20 @@ export class IcingaObjectViewModel extends BusyIndicatorViewModel {
     this.#addAck = null;
     this.#addComment = null;
     this.#addNotification = null;
+
+    if (this.#object.attrs.last_check_result.performance_data) {
+      let d;
+      let s;
+
+      for (let i = 0; i < this.#object.attrs.last_check_result.performance_data.length; i++) {
+        d = this.#object.attrs.last_check_result.performance_data[i];
+        s = d.indexOf(';');
+
+        if (s != -1) {
+          this.#object.attrs.last_check_result.performance_data[i] = d.substring(0, s);
+        }
+      }
+    }
   }
 
   get now() {
