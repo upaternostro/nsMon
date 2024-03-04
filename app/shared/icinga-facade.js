@@ -14,7 +14,13 @@ export class IcingaFacade {
         return IcingaFacade.#_instance;
     }
     
+    #errorModuleName = null;
+
     constructor() {
+    }
+
+    set errorModuleName(errorModuleName) {
+        this.#errorModuleName = errorModuleName;
     }
 
     requestErrorHandler(error) {
@@ -23,9 +29,12 @@ export class IcingaFacade {
             text: error.toString(),
             duration: ToastDuration.LONG,
         }).show();
-        Frame.topmost().navigate({
-            moduleName: 'settings/settings-page',
-        })
+
+        if (this.#errorModuleName) {
+            Frame.topmost().navigate({
+                moduleName: this.#errorModuleName,
+            })
+        }
     }
 
     request(path, callback) {
