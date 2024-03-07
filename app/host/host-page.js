@@ -1,5 +1,5 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Frame, ApplicationSettings } from '@nativescript/core'
+import { Frame } from '@nativescript/core'
 
 import { IcingaObjectViewModel } from '~/shared/icinga-object-view-model'
 import { SelectedPageService } from '~/shared/selected-page-service'
