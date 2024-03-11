@@ -6,7 +6,7 @@
     xmlns:pluginOutput="widgets/plugin-output"
     xmlns:comments="widgets/comments">
 
-    <ActionBar>
+    <ActionBar swipe="onSwipe">
         <NavigationButton visibility="hidden"></NavigationButton>
         <GridLayout columns="30,*" rows="auto,auto">
             <Label text="Service Details" colSpan="2" row="0" padding="0" />
@@ -16,7 +16,7 @@
     </ActionBar>
 
     <RootLayout>
-        <GridLayout columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">
+        <GridLayout swipe="onSwipe" columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto" class="page__content">
             <Label row="0" colSpan="2" class="{{ 'service-detail-title ' + (object.isOk ? 'service-ok' : 'service-critical' ) }}">
                 <FormattedString>
                     <Span text="{{ object.attrs.host_name }}" />

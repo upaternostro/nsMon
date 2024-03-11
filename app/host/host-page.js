@@ -1,5 +1,5 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Frame } from '@nativescript/core'
+import { Frame, SwipeDirection } from '@nativescript/core'
 
 import { IcingaObjectViewModel } from '~/shared/icinga-object-view-model'
 import { SelectedPageService } from '~/shared/selected-page-service'
@@ -16,7 +16,7 @@ export function onNavigatingTo(args) {
   
   page = args.object
   page.bindingContext = new IcingaObjectViewModel(page.navigationContext.object)
-  SelectedPageService.getInstance().updateSelectedPage('Host');
+  SelectedPageService.getInstance().updateSelectedPage('Hosts'); // fake Hosts (plural) page, as this is a detail page not appearing in the drawer
 
   IcingaFacade.getInstance().getHostComments(page.navigationContext.object.attrs.__name, commentsCB)
 }
@@ -67,4 +67,10 @@ export function onNotificationTap() {
   openModal("~/widgets/add-notification/dialog", require("~/widgets/add-notification/dialog-host"), {
     model: page.bindingContext,
   });
+}
+
+export function onSwipe(args) {
+  if (args.direction == SwipeDirection.right) {
+    Frame.topmost().goBack();
+  }
 }

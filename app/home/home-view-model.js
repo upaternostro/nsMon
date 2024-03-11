@@ -2,6 +2,16 @@
 import { BusyIndicatorViewModel } from '~/shared/busy-indicator-view-model'
 
 export class HomeViewModel extends BusyIndicatorViewModel {
+  static #_instance;
+
+  static getInstance() {
+      if (HomeViewModel.#_instance == null) {
+        HomeViewModel.#_instance = new HomeViewModel();
+      }
+
+      return HomeViewModel.#_instance;
+  }
+  
   #icingaApplication;
   #cIB;
 

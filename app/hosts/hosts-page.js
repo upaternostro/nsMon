@@ -1,24 +1,26 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Application, Frame } from '@nativescript/core'
+import { Application, Frame, SwipeDirection } from '@nativescript/core'
 
 import { SelectedPageService } from '~/shared/selected-page-service'
-import { IcingaObjectsViewModel } from '~/shared/icinga-objects-view-model'
+import { HostsViewModel } from './hosts-view-model'
 import { IcingaFacade } from '~/shared/icinga-facade';
 import { IcingaObject } from '~/shared/icinga-object';
+import { navigateOnSwipe } from '~/app-root/app-root'
 
 var page;
 var pullRefresh = null;
 
 export function onNavigatingTo(args) {
+  SelectedPageService.getInstance().updateSelectedPage('Hosts');
+
   if (args.isBackNavigation) {
     return;
   }
   
   page = args.object;
-  SelectedPageService.getInstance().updateSelectedPage('Hosts');
-  page.bindingContext = new IcingaObjectsViewModel();
+  page.bindingContext = HostsViewModel.getInstance();
   
-  populateHostsList(false);
+  populateHostsList(page.bindingContext.showAllObjects);
 }
 
 export function onDrawerButtonTap(args) {
@@ -41,16 +43,28 @@ export function hostsCB(obj) {
 }
 
 export function onCheckedChange(args) {
-  const showAllObjects = !page.bindingContext.showAllObjects;
-  const hvm = new IcingaObjectsViewModel();
+  const showAllObjects = args.value;
+  const hvm = page.bindingContext;
+
+  if (showAllObjects == hvm.showAllObjects) {
+    /*
+     * Model already contains the correct value. This may happen on page navigation
+     * if the switch is activated because of model value. In this case, NativeScript
+     * fires this event and, if you execute it calling populateHostsList, you'll end
+     * up with a list if doubled items, as the populateHostsList is called also by
+     * onNavigatingTo (does not need to be a back navigation).
+     */
+    return;
+  }
 
   hvm.showAllObjects = showAllObjects;
-  page.bindingContext = hvm;
-
   populateHostsList(showAllObjects);
 }
 
 function populateHostsList(showAllObjects) {
+  page.bindingContext.busy = true;
+  page.bindingContext.clearObjects();
+
   if (showAllObjects) {
     IcingaFacade.getInstance().getHosts(hostsCB);
   } else {
@@ -69,6 +83,10 @@ export function onRefresh(args) {
   const showAllObjects = page.bindingContext.showAllObjects;
 
   pullRefresh = args.object;
-  page.bindingContext.clearObjects();
   populateHostsList(showAllObjects);
+}
+
+export function onSwipe(args) {
+// console.log('onSwipe ' + args.direction);
+  navigateOnSwipe(args);
 }

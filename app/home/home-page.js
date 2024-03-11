@@ -4,18 +4,20 @@ import { Application } from '@nativescript/core'
 import { SelectedPageService } from '~/shared/selected-page-service'
 import { HomeViewModel } from './home-view-model'
 import { IcingaFacade } from '~/shared/icinga-facade';
+import { navigateOnSwipe } from '~/app-root/app-root'
 
 var page;
 var pullRefresh = null;
 
 export function onNavigatingTo(args) {
+  SelectedPageService.getInstance().updateSelectedPage('Home');
+
   if (args.isBackNavigation) {
     return;
   }
   
   page = args.object;
-  SelectedPageService.getInstance().updateSelectedPage('Home')
-  page.bindingContext = new HomeViewModel();
+  page.bindingContext = HomeViewModel.getInstance();
 
   IcingaFacade.getInstance().getStatus(statusCB);
 }
@@ -41,6 +43,10 @@ export function statusCB(obj) {
   if (pullRefresh) {
     pullRefresh.refreshing = false;
   }
+}
+
+export function onSwipe(args) {
+  navigateOnSwipe(args);
 }
 
 export function onRefresh(args) {
