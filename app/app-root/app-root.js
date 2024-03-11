@@ -14,9 +14,8 @@ export function onNavigationItemTap(args) {
   const component = args.object
   const componentRoute = component.route
   const componentTitle = component.title
-  const bindingContext = component.bindingContext
 
-  bindingContext.set('selectedPage', componentTitle)
+  page.bindingContext.set('selectedPage', componentTitle)
 
   Frame.topmost().navigate({
     moduleName: componentRoute,
@@ -96,4 +95,8 @@ export function navigateOnSwipe(args) {
   } else {
     console.warn('nsMon.app-root.navigateOnSwipe wrong direction ' + args.direction);
   }
+}
+
+export function entriesTemplateSelector(item, index, items) {
+  return item.type;
 }

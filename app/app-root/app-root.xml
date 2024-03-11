@@ -19,51 +19,26 @@
 
             <ScrollView row="1">
                 <StackLayout>
-                    <GridLayout
-            columns="auto, *"
-            class="{{ 'nt-drawer__list-item' + (selectedPage === 'Home' ? ' -selected': '') }}"
-            route="home/home-page"
-            title="Home"
-            tap="onNavigationItemTap"
-          >
-                        <Label row="0" col="0" text="&#xf015;" class="nt-icon fas" />
-                        <Label row="0" col="1" text="Home" class="p-r-10" />
-                    </GridLayout>
+                    <Repeater items="{{ entries }}" itemTemplateSelector="entriesTemplateSelector">
+                        <Repeater.itemTemplates>
+                            <template key="hr">
+                                <StackLayout class="hr" />
+                            </template>
+                            <template key="entry">
+                                <GridLayout
+                        columns="auto, *"
+                        class="{{ 'nt-drawer__list-item' + (selected ? ' -selected': '') }}"
+                        route="{{ route }}"
+                        title="{{ title }}"
+                        tap="onNavigationItemTap"
+                    >
+                                    <Label row="0" col="0" text="{{ icon }}" class="{{ iconClass }}" />
+                                    <Label row="0" col="1" text="{{ title }}" class="p-r-10" />
+                                </GridLayout>
+                            </template>
+                        </Repeater.itemTemplates>
+                    </Repeater>
 
-                    <GridLayout
-            columns="auto, *"
-            class="{{ 'nt-drawer__list-item' + (selectedPage === 'Hosts' ? ' -selected': '') }}"
-            route="hosts/hosts-page"
-            title="Hosts"
-            tap="onNavigationItemTap"
-          >
-                        <Label row="0" col="0" text="&#xf002;" class="nt-icon fas" />
-                        <Label row="0" col="1" text="Hosts" class="p-r-10" />
-                    </GridLayout>
-
-                    <GridLayout
-            columns="auto, *"
-            class="{{ 'nt-drawer__list-item' + (selectedPage === 'Services' ? ' -selected': '') }}"
-            route="services/services-page"
-            title="Services"
-            tap="onNavigationItemTap"
-          >
-                        <Label row="0" col="0" text="&#xf1ea;" class="nt-icon far" />
-                        <Label row="0" col="1" text="Services" class="p-r-10" />
-                    </GridLayout>
-
-                    <StackLayout class="hr" />
-
-                    <GridLayout
-            columns="auto, *"
-            class="{{ 'nt-drawer__list-item' + (selectedPage === 'Settings' ? ' -selected': '') }}"
-            route="settings/settings-page"
-            title="Settings"
-            tap="onNavigationItemTap"
-          >
-                        <Label row="0" col="0" text="&#xf013;" class="nt-icon fas" />
-                        <Label row="0" col="1" text="Settings" class="p-r-10" />
-                    </GridLayout>
                 </StackLayout>
             </ScrollView>
         </GridLayout>
