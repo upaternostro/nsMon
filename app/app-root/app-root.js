@@ -29,45 +29,56 @@ export function onNavigationItemTap(args) {
 }
 
 function nextModule() {
-  let nextModule;
+  let foundSelected = false;
+  let nextEntry;
 
-  switch (page.bindingContext.selectedPage) {
-    case 'Home':
-      nextModule = 'hosts/hosts-page';
-      break;
-    case 'Hosts':
-      nextModule = 'services/services-page';
-      break;
-    case 'Services':
-      nextModule = 'settings/settings-page';
-      break;
-    case 'Settings':
-      nextModule = 'home/home-page';
-      break;
+  for (const e of page.bindingContext.entries) {
+    if (!foundSelected) {
+      if (e.selected) {
+        foundSelected = true;
+      }
+    } else {
+      if (e.type == 'entry') {
+        nextEntry = e;
+        break;
+      }
+    }
   }
 
-  return nextModule;
+  if (!nextEntry) {
+    for (const e of page.bindingContext.entries) {
+      if (e.type == 'entry') {
+        nextEntry = e;
+        break;
+      }
+    }
+  }
+
+  return nextEntry.route;
 }
 
 function previousModule() {
-  let prevModule;
+  let previousEntry;
 
-  switch (page.bindingContext.selectedPage) {
-    case 'Home':
-      prevModule = 'settings/settings-page';
+  for (const e of page.bindingContext.entries) {
+    if (e.selected) {
       break;
-    case 'Hosts':
-      prevModule = 'home/home-page';
-      break;
-    case 'Services':
-      prevModule = 'hosts/hosts-page';
-      break;
-    case 'Settings':
-      prevModule = 'services/services-page';
-      break;
+    }
+
+    if (e.type == 'entry') {
+      previousEntry = e;
+    }
   }
 
-  return prevModule;
+  if (!previousEntry) {
+    for (const e of page.bindingContext.entries) {
+      if (e.type == 'entry') {
+        previousEntry = e;
+      }
+    }
+  }
+
+  return previousEntry.route;
 }
 
 export function navigateOnSwipe(args) {
