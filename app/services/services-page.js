@@ -1,5 +1,5 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Application, Frame, SwipeDirection } from '@nativescript/core'
+import { Application, Frame } from '@nativescript/core'
 
 import { SelectedPageService } from '~/shared/selected-page-service'
 import { ServicesViewModel } from './services-view-model'
