@@ -3,6 +3,7 @@ import { ApplicationSettings } from '@nativescript/core'
 import { closeModal, openModal } from '~/shared/modal'
 import { IcingaFacade } from '~/shared/icinga-facade';
 import { AddAckViewModel } from '~/widgets/add-ack/model';
+import { Toasty, ToastDuration } from '@triniwiz/nativescript-toasty';
 
 var model;
 

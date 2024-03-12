@@ -3,6 +3,7 @@ import { ApplicationSettings } from '@nativescript/core'
 import { closeModal, openModal } from '~/shared/modal'
 import { IcingaFacade } from '~/shared/icinga-facade';
 import { AddCommentViewModel } from '~/widgets/add-comment/model';
+import { Toasty, ToastDuration } from '@triniwiz/nativescript-toasty';
 
 var model;
 
