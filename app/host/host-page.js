@@ -71,6 +71,6 @@ export function onNotificationTap() {
 
 export function onSwipe(args) {
   if (args.direction == SwipeDirection.right) {
-    Frame.topmost().goBack();
+    onBackButtonTap(args);
   }
 }
