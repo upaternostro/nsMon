@@ -9,14 +9,16 @@ import { navigateOnSwipe } from '~/app-root/app-root'
 
 var page;
 var pullRefresh = null;
+var forceRefresh = false;
 
 export function onNavigatingTo(args) {
   SelectedPageService.getInstance().updateSelectedPage('Services');
 
-  if (args.isBackNavigation) {
+  if (args.isBackNavigation && !forceRefresh) {
     return;
   }
-  
+
+  forceRefresh = false;
   page = args.object;
   page.bindingContext = ServicesViewModel.getInstance();
   
@@ -75,7 +77,10 @@ function populateServicesList(showAllObjects) {
 export function onItemTap(args) {
   Frame.topmost().navigate({
     moduleName: 'service/service-page',
-    context: { object: page.bindingContext.getItem(args.index) }
+    context: {
+      object: page.bindingContext.getItem(args.index),
+      forceRefreshCB: forceRefreshCB,
+    },
   })
 }
 
@@ -88,4 +93,8 @@ export function onRefresh(args) {
 
 export function onSwipe(args) {
   navigateOnSwipe(args);
+}
+
+export function forceRefreshCB() {
+  forceRefresh = true;
 }

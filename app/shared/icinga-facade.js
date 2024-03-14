@@ -97,6 +97,14 @@ export class IcingaFacade {
         this.get('/v1/objects/comments?joins=host.__name&filter=host.__name==%22' + hostName + '%22', callback);
     }
 
+    getHost(hostName, callback) {
+        this.get('/v1/objects/hosts&filter=host.__name==%22' + hostName + '%22', callback);
+    }
+
+    getService(serviceName, callback) {
+        this.get('/v1/objects/services?joins=host.address&joins=host.address6&filter=service.__name==%22' + serviceName + '%22', callback);
+    }
+
     post(path, content, callback) {
         const requestOptions = {
             url: ApplicationSettings.getString('url') + path,

@@ -6,11 +6,13 @@ import { AddAckViewModel } from '~/widgets/add-ack/model';
 import { Toasty, ToastDuration } from '@triniwiz/nativescript-toasty';
 
 var model;
+var forceRefreshCB;
 
 export function onModalOpen(args) {
 // console.log('onModalOpen: ' + args);
     model = args.model;
     model.addAck = new AddAckViewModel(model);
+    forceRefreshCB = args.forceRefreshCB;
 }
 
 export function onAckOkTap(args) {
@@ -38,6 +40,7 @@ export function addAckCB(obj) {
         text: obj.results[0].status,
         duration: ToastDuration.LONG,
     }).show();
+    forceRefreshCB(obj);
 }
 
 export function onDateTap(args) {

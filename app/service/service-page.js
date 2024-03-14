@@ -6,6 +6,7 @@ import { SelectedPageService } from '~/shared/selected-page-service'
 import { IcingaFacade } from '~/shared/icinga-facade';
 import { Toasty, ToastDuration } from '@triniwiz/nativescript-toasty';
 import { openModal } from '~/shared/modal'
+import { IcingaObject } from '~/shared/icinga-object'
 
 var page;
 
@@ -14,10 +15,14 @@ export function onNavigatingTo(args) {
     return;
   }
   
-  page = args.object
-  page.bindingContext = new IcingaObjectViewModel(page.navigationContext.object)
+  page = args.object;
+  page.bindingContext = new IcingaObjectViewModel(page.navigationContext.object);
   SelectedPageService.getInstance().updateSelectedPage('Services'); // fake Settings (plural) page, as this is a detail page not appearing in the drawer
 
+  getComments();
+}
+ 
+export function getComments() {
   IcingaFacade.getInstance().getServiceComments(page.navigationContext.object.attrs.__name, commentsCB)
 }
 
@@ -27,6 +32,8 @@ export function onBackButtonTap(args) {
 
 export function commentsCB(obj) {
   if (obj) {
+    page.bindingContext.clearComments();
+
     for (const r of obj.results) {
       page.bindingContext.addComments(r);
     }
@@ -44,14 +51,18 @@ export function checkCB(obj) {
     text: obj.results[0].status,
     duration: ToastDuration.LONG,
   }).show();
+  page.navigationContext.forceRefreshCB();
 }
 
 export function onAckTap() {
   if (page.bindingContext.object.attrs.acknowledgement != 0) {
-    openModal("~/widgets/remove-ack/dialog", require("~/widgets/remove-ack/dialog-service"));
+    openModal("~/widgets/remove-ack/dialog", require("~/widgets/remove-ack/dialog-service"), {
+      forceRefreshCB: refreshCB,
+    });
   } else {
     openModal("~/widgets/add-ack/dialog", require("~/widgets/add-ack/dialog-service"), {
       model: page.bindingContext,
+      forceRefreshCB: refreshCB,
     });
   }
 }
@@ -59,6 +70,7 @@ export function onAckTap() {
 export function onCommentTap() {
   openModal("~/widgets/add-comment/dialog", require("~/widgets/add-comment/dialog-service"), {
     model: page.bindingContext,
+    refreshCommentsCB: getComments,
   });
 }
 
@@ -72,4 +84,14 @@ export function onSwipe(args) {
   if (args.direction == SwipeDirection.right) {
     onBackButtonTap(args);
   }
+}
+
+export function refreshCB(obj) {
+  IcingaFacade.getInstance().getService(page.bindingContext.object.attrs.__name, serviceCB);
+}
+
+export function serviceCB(obj) {
+  page.bindingContext.object = IcingaObject.assignObject(obj.results[0]);
+  getComments();
+  page.navigationContext.forceRefreshCB();
 }

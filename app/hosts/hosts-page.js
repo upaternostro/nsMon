@@ -9,14 +9,16 @@ import { navigateOnSwipe } from '~/app-root/app-root'
 
 var page;
 var pullRefresh = null;
+var forceRefresh = false;
 
 export function onNavigatingTo(args) {
   SelectedPageService.getInstance().updateSelectedPage('Hosts');
 
-  if (args.isBackNavigation) {
+  if (args.isBackNavigation && !forceRefresh) {
     return;
   }
   
+  forceRefresh = false;
   page = args.object;
   page.bindingContext = HostsViewModel.getInstance();
   
@@ -75,7 +77,10 @@ function populateHostsList(showAllObjects) {
 export function onItemTap(args) {
   Frame.topmost().navigate({
     moduleName: 'host/host-page',
-    context: { object: page.bindingContext.getItem(args.index) }
+    context: {
+      object: page.bindingContext.getItem(args.index),
+      forceRefreshCB: forceRefreshCB,
+    },
   })
 }
 
@@ -89,4 +94,8 @@ export function onRefresh(args) {
 export function onSwipe(args) {
 // console.log('onSwipe ' + args.direction);
   navigateOnSwipe(args);
+}
+
+export function forceRefreshCB() {
+  forceRefresh = true;
 }

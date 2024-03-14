@@ -6,10 +6,12 @@ import { AddCommentViewModel } from '~/widgets/add-comment/model';
 import { Toasty, ToastDuration } from '@triniwiz/nativescript-toasty';
 
 var model;
+var refreshCommentsCB;
 
 export function onModalOpen(args) {
     model = args.model;
     model.addComment = new AddCommentViewModel(model);
+    refreshCommentsCB = args.refreshCommentsCB;
 }
 
 export function onCommentOkTap(args) {
@@ -31,6 +33,7 @@ export function addCommentCB(obj) {
         text: obj.results[0].status,
         duration: ToastDuration.LONG,
     }).show();
+    refreshCommentsCB(obj);
 }
 
 export function onDateTap(args) {
