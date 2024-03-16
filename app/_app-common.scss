@@ -98,11 +98,23 @@
 .modal-dialog {
   vertical-align: center;
   horizontal-align: center;
-  background-color: white;
   padding: 20 10;
   border-width: 2;
   border-color: #618db2;
   border-radius: 20 19 20 20;
+
+  &.ns-light {
+    background-color: white;
+  }
+
+  &.ns-dark {
+    background-color: black;
+
+    // Hugly, but better than nothing...
+    DatePicker, TimePicker {
+      background-color: gray;
+    }
+  }
 }
 
 // inspired by https://blog.nativescript.org/how-to-build-a-simple-dialog-for-your-nativescript-apps/
