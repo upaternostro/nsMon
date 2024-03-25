@@ -1,10 +1,10 @@
 // Copyright Ugo Paternostro 2023, 2024. Licensed under the EUPL-1.2 or later.
-import { Application } from '@nativescript/core'
+import { Application } from '@nativescript/core';
 
-import { SelectedPageService } from '~/shared/selected-page-service'
-import { HomeViewModel } from './home-view-model'
+import { SelectedPageService } from '~/shared/selected-page-service';
+import { HomeViewModel } from './home-view-model';
 import { IcingaFacade } from '~/shared/icinga-facade';
-import { navigateOnSwipe } from '~/app-root/app-root'
+import { navigateOnSwipe } from '~/app-root/app-root';
 
 var page;
 var pullRefresh = null;
