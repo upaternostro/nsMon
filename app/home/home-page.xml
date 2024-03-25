@@ -37,6 +37,8 @@
                 <FormattedString>
                     <Span text="{{ cIB.status.num_services_ok + cIB.status.num_services_problem }}" />
                     <Span text="/" />
+                    <Span text="{{ cIB.status.num_services_unknown }}" style="color: #c57fff" />
+                    <Span text="/" />
                     <Span text="{{ cIB.status.num_services_critical }}" style="color: red" />
                     <Span text="/" />
                     <Span text="{{ cIB.status.num_services_warning }}" style="color: orange" />
