@@ -4,6 +4,7 @@ import { Application } from '@nativescript/core'
 import { SelectedPageService } from '~/shared/selected-page-service'
 import { SettingsViewModel } from './settings-view-model'
 import { navigateOnSwipe } from '~/app-root/app-root'
+import { updateTimer } from '~/app';
 
 var page;
 
@@ -15,7 +16,7 @@ export function onNavigatingTo(args) {
   }
   
   page = args.object;
-  page.bindingContext = new SettingsViewModel();
+  page.bindingContext = SettingsViewModel.getInstance();
 }
 
 export function onDrawerButtonTap(args) {
@@ -25,6 +26,8 @@ export function onDrawerButtonTap(args) {
 
 export function onSaveTap(args) {
   page.bindingContext.persistConfig();
+  // notify worker of setting change
+  updateTimer.postMessage({});
 }
 
 export function onSwipe(args) {

@@ -11,13 +11,19 @@
         </GridLayout>
     </ActionBar>
 
-    <GridLayout swipe="onSwipe" columns="auto,*" rows="auto,auto,auto,auto" class="page__content">
+    <GridLayout swipe="onSwipe" columns="auto,*" rows="auto,auto,auto,auto,auto,auto,auto" class="page__content">
         <Label col="0" row="0" text="Server URL"/>
         <TextField col="1" row="0" hint="Icinga2 server URL" autocapitalizationType="none" keyboardType="url" text="{{ url }}"/>
         <Label col="0" row="1" text="Username"/>
         <TextField col="1" row="1" hint="user" autocapitalizationType="none" text="{{ username }}"/>
         <Label col="0" row="2" text="Password"/>
         <TextField col="1" row="2" hint="password" autocapitalizationType="none" secure="true" text="{{ password }}"/>
-        <Button id="settings_button_save" col="0" row="3" colspan="2" text="Save" tap="onSaveTap" isEnabled="{{ saveEnabled }}" />
+        <Label col="0" row="3" text="Enable autorefresh"/>
+        <Switch col="1" row="3" checked="{{ autoRefresh }}" />
+        <Label col="0" row="4" text="Autorefresh interval"/>
+        <ListPicker col="1" row="4" isEnabled="{{ autoRefresh }}" items="{{ intervals }}" selectedIndex="{{ selectedInterval }}" />
+        <Label col="0" row="5" text="Enable notifications"/>
+        <Switch col="1" row="5" isEnabled="{{ autoRefresh }}" checked="{{ notifications }}" />
+        <Button id="settings_button_save" col="0" row="6" colspan="2" text="Save" tap="onSaveTap" isEnabled="{{ saveEnabled }}" />
     </GridLayout>
 </Page>

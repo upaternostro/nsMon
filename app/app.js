@@ -12,6 +12,8 @@ Application.setResources({
 
 IcingaFacade.getInstance().errorModuleName = 'settings/settings-page';
 
+export const updateTimer = new Worker('~/workers/update-timer');
+
 Application.run({ moduleName: 'app-root/app-root' })
 
 /*

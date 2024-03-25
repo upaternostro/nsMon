@@ -5,6 +5,7 @@ import { SelectedPageService } from '~/shared/selected-page-service';
 import { HomeViewModel } from './home-view-model';
 import { IcingaFacade } from '~/shared/icinga-facade';
 import { navigateOnSwipe } from '~/app-root/app-root';
+import { updateTimer } from '~/app';
 
 var page;
 var pullRefresh = null;
@@ -20,6 +21,11 @@ export function onNavigatingTo(args) {
   page.bindingContext = HomeViewModel.getInstance();
 
   IcingaFacade.getInstance().getStatus(statusCB);
+
+  updateTimer.onmessage = (e) => {
+    page.bindingContext.icingaApplication = e.data.icingaApplication;
+    page.bindingContext.cIB = e.data.cIB;
+  }
 }
 
 export function onDrawerButtonTap(args) {

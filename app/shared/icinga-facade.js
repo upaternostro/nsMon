@@ -89,6 +89,14 @@ export class IcingaFacade {
         this.get('/v1/status', callback);
     }
 
+    getUnhandledHosts(callback) {
+        this.get('/v1/objects/hosts?filter=host.state!=0%26%26host.acknowledgement==0', callback);
+    }
+
+    getUnhandledServices(callback) {
+        this.get('/v1/objects/services?filter=service.state!=0%26%26service.acknowledgement==0', callback);
+    }
+
     getServiceComments(serviceName, callback) {
         this.get('/v1/objects/comments?joins=service.__name&filter=service.__name==%22' + serviceName + '%22', callback);
     }
